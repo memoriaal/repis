@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Load environment variables
-source ../.env || source .env
+current_dir="$(dirname "$0")"
+source "$current_dir/../.env"
 
 # Check if SSH tunnel is already established
 if nc -z localhost $SSH_LOCAL_PORT; then
