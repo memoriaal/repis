@@ -1,3 +1,17 @@
+#!/bin/bash
+
+# Load environment variables
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source "$script_dir/../.env"
+
+# Check if the dumps/routines directory exists, if not, create it
+if [ ! -d "$script_dir/../dumps/routines" ]; then
+  mkdir -p $script_dir/../dumps/routines
+fi
+if [ ! -d "$script_dir/../dumps/schemas" ]; then
+  mkdir -p $script_dir/../dumps/schemas
+fi
+
 if nc -z localhost $SSH_LOCAL_PORT; then
     now=`mysql --host=127.0.0.1 --port=3306 -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" pub<<EOFMYSQL
 select now();
