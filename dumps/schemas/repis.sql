@@ -1252,7 +1252,7 @@ CREATE TABLE `log_msg` (
   `tm` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `Index 2` (`src`)
-) ENGINE=InnoDB AUTO_INCREMENT=225950 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=226014 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `massuuendused`
