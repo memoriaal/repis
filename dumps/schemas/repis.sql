@@ -1252,7 +1252,7 @@ CREATE TABLE `log_msg` (
   `tm` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `Index 2` (`src`)
-) ENGINE=InnoDB AUTO_INCREMENT=225490 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=225534 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `massuuendused`
@@ -1527,7 +1527,7 @@ CREATE TABLE `z_queue` (
   `msg` varchar(100) COLLATE utf8_estonian_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kirjekood1` (`kirjekood1`,`kirjekood2`,`task`,`params`,`erred_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Current Database: `repis`
