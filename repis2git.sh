@@ -1,11 +1,11 @@
 #!/bin/bash
 
-./scripts/establish_tunnel.sh
+. scripts/establish_tunnel.sh
 
-./scripts/dump_schemas.sh
-./scripts/dump_routines.sh
+. scripts/dump_schemas.sh
+. scripts/dump_routines.sh
 
-./scripts/close_tunnel.sh
+. scripts/close_tunnel.sh
 
 # commit changes
 git add .
