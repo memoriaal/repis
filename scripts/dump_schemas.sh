@@ -8,7 +8,7 @@ source "$script_dir/../.env"
 if nc -z localhost $SSH_LOCAL_PORT; then
   for db in ${MYSQL_DATABASES[@]}; do
     echo "Dumping schema for ${db}..."
-    mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --databases ${db} --no-data | grep -v "/*!" | head -n -2 > dumps/schemas/${db}.sql
+    mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --databases ${db} --no-data --skip-add-drop-table | grep -v "/*!" | head -n -2 > dumps/schemas/${db}.sql
     echo "Dumped schema for ${db}."
   done
 else
