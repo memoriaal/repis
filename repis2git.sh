@@ -10,4 +10,4 @@
 # commit changes
 git add .
 git commit -m "Update schemas, functions and procedures"
-git push origin master
+git push
