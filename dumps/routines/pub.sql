@@ -248,6 +248,7 @@ BEGIN
 
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
   
+  
   OPEN cur1;
   read_loop: loop
 
@@ -258,6 +259,7 @@ BEGIN
     END IF;
 
     CALL repis.proc_NK_refresh(_persoon, _persoon);
+
 
   END LOOP;
   CLOSE cur1;
