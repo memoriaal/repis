@@ -234,7 +234,6 @@ CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `repub`(
 BEGIN
 
   DECLARE _persoon CHAR(10);
-
   DECLARE finished INTEGER DEFAULT 0;
   DECLARE cur1 CURSOR for
       SELECT DISTINCT k0.kirjekood
