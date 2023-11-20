@@ -16,7 +16,6 @@ USE `aruanded`;
 -- Temporary table structure for view `ainult12SM`
 --
 
-DROP TABLE IF EXISTS `ainult12SM`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -56,7 +55,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `ainult12SM_leiud`
 --
 
-DROP TABLE IF EXISTS `ainult12SM_leiud`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `kirjed`,
@@ -97,7 +95,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `allkirjastatud_nimekiri_2018_11_16`
 --
 
-DROP TABLE IF EXISTS `allkirjastatud_nimekiri_2018_11_16`;
 CREATE TABLE `allkirjastatud_nimekiri_2018_11_16` (
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kirje` text COLLATE utf8_estonian_ci DEFAULT NULL
@@ -107,7 +104,6 @@ CREATE TABLE `allkirjastatud_nimekiri_2018_11_16` (
 -- Temporary table structure for view `asukohad`
 --
 
-DROP TABLE IF EXISTS `asukohad`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `nimetus`,
@@ -118,7 +114,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `eesnimeta_persoonid`
 --
 
-DROP TABLE IF EXISTS `eesnimeta_persoonid`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -170,7 +165,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `emanimed`
 --
 
-DROP TABLE IF EXISTS `emanimed`;
 CREATE TABLE `emanimed` (
   `nimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`nimi`)
@@ -180,7 +174,6 @@ CREATE TABLE `emanimed` (
 -- Temporary table structure for view `endised_kivikirjed`
 --
 
-DROP TABLE IF EXISTS `endised_kivikirjed`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `K_kirjekood`,
@@ -197,7 +190,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `episoodid`
 --
 
-DROP TABLE IF EXISTS `episoodid`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `liik`,
@@ -211,7 +203,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `hermafrodiidid`
 --
 
-DROP TABLE IF EXISTS `hermafrodiidid`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `nimi`,
@@ -226,7 +217,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `kirjed_hpat`
 --
 
-DROP TABLE IF EXISTS `kirjed_hpat`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -270,7 +260,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `kirjekoodid`
 --
 
-DROP TABLE IF EXISTS `kirjekoodid`;
 CREATE TABLE `kirjekoodid` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`kirjekood`)
@@ -280,7 +269,6 @@ CREATE TABLE `kirjekoodid` (
 -- Temporary table structure for view `kiviraamat`
 --
 
-DROP TABLE IF EXISTS `kiviraamat`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -298,7 +286,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `kyyditatud_sakslased`
 --
 
-DROP TABLE IF EXISTS `kyyditatud_sakslased`;
 CREATE TABLE `kyyditatud_sakslased` (
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
@@ -307,7 +294,6 @@ CREATE TABLE `kyyditatud_sakslased` (
 -- Temporary table structure for view `liidetud_kivid`
 --
 
-DROP TABLE IF EXISTS `liidetud_kivid`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -318,7 +304,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `lisatahvlid_2020`
 --
 
-DROP TABLE IF EXISTS `lisatahvlid_2020`;
 CREATE TABLE `lisatahvlid_2020` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
@@ -340,7 +325,6 @@ CREATE TABLE `lisatahvlid_2020` (
 -- Table structure for table `memo_ru_perenimed`
 --
 
-DROP TABLE IF EXISTS `memo_ru_perenimed`;
 CREATE TABLE `memo_ru_perenimed` (
   `perenimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `cnt` int(11) DEFAULT NULL
@@ -350,7 +334,6 @@ CREATE TABLE `memo_ru_perenimed` (
 -- Temporary table structure for view `metsavennad`
 --
 
-DROP TABLE IF EXISTS `metsavennad`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -367,7 +350,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `mitu_raamatuperet`
 --
 
-DROP TABLE IF EXISTS `mitu_raamatuperet`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -379,7 +361,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `muutunud_kivikirjed`
 --
 
-DROP TABLE IF EXISTS `muutunud_kivikirjed`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `K_kirjekood`,
@@ -400,7 +381,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `nimeraamat`
 --
 
-DROP TABLE IF EXISTS `nimeraamat`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `nimi`,
@@ -414,7 +394,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `pensionitoimikud`
 --
 
-DROP TABLE IF EXISTS `pensionitoimikud`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -431,7 +410,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `persoonikirjed`
 --
 
-DROP TABLE IF EXISTS `persoonikirjed`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -450,7 +428,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `persoonikoodid`
 --
 
-DROP TABLE IF EXISTS `persoonikoodid`;
 CREATE TABLE `persoonikoodid` (
   `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
@@ -459,7 +436,6 @@ CREATE TABLE `persoonikoodid` (
 -- Table structure for table `persoonikoodid_2021_01_06`
 --
 
-DROP TABLE IF EXISTS `persoonikoodid_2021_01_06`;
 CREATE TABLE `persoonikoodid_2021_01_06` (
   `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
   PRIMARY KEY (`persoon`)
@@ -469,7 +445,6 @@ CREATE TABLE `persoonikoodid_2021_01_06` (
 -- Table structure for table `persoonikoodid_copy`
 --
 
-DROP TABLE IF EXISTS `persoonikoodid_copy`;
 CREATE TABLE `persoonikoodid_copy` (
   `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
   PRIMARY KEY (`persoon`)
@@ -479,7 +454,6 @@ CREATE TABLE `persoonikoodid_copy` (
 -- Temporary table structure for view `segased_sood`
 --
 
-DROP TABLE IF EXISTS `segased_sood`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -493,7 +467,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `statistika`
 --
 
-DROP TABLE IF EXISTS `statistika`;
 CREATE TABLE `statistika` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `isikuid_baasis` mediumint(7) unsigned DEFAULT 0,
@@ -512,7 +485,6 @@ CREATE TABLE `statistika` (
 -- Temporary table structure for view `topelt_kivikirjed`
 --
 
-DROP TABLE IF EXISTS `topelt_kivikirjed`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -523,7 +495,6 @@ SET character_set_client = @saved_cs_client;
 -- Temporary table structure for view `uued_kivikirjed`
 --
 
-DROP TABLE IF EXISTS `uued_kivikirjed`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,

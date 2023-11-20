@@ -16,7 +16,6 @@ USE `import`;
 -- Table structure for table `49_kyyd_vab`
 --
 
-DROP TABLE IF EXISTS `49_kyyd_vab`;
 CREATE TABLE `49_kyyd_vab` (
   `emi_id` int(11) DEFAULT NULL,
   `isikukood` char(63) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -29,7 +28,6 @@ CREATE TABLE `49_kyyd_vab` (
 -- Table structure for table `49kyyd_mittesurnud_lapsed`
 --
 
-DROP TABLE IF EXISTS `49kyyd_mittesurnud_lapsed`;
 CREATE TABLE `49kyyd_mittesurnud_lapsed` (
   `jrk` int(11) NOT NULL,
   `emi_id` int(11) DEFAULT NULL,
@@ -47,7 +45,6 @@ CREATE TABLE `49kyyd_mittesurnud_lapsed` (
 -- Table structure for table `NS_ohvrid`
 --
 
-DROP TABLE IF EXISTS `NS_ohvrid`;
 CREATE TABLE `NS_ohvrid` (
   `publitseerida` tinyint(4) DEFAULT NULL,
   `kirjekood` varchar(10) COLLATE utf8_estonian_ci NOT NULL,
@@ -94,7 +91,6 @@ CREATE TABLE `NS_ohvrid` (
 -- Table structure for table `R14-R16`
 --
 
-DROP TABLE IF EXISTS `R14-R16`;
 CREATE TABLE `R14-R16` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -208,7 +204,6 @@ DELIMITER ;
 -- Table structure for table `RR_paring_28092021`
 --
 
-DROP TABLE IF EXISTS `RR_paring_28092021`;
 CREATE TABLE `RR_paring_28092021` (
   `syk.id` smallint(6) NOT NULL,
   `markus` varchar(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -245,7 +240,6 @@ CREATE TABLE `RR_paring_28092021` (
 -- Table structure for table `aa_eesnimed`
 --
 
-DROP TABLE IF EXISTS `aa_eesnimed`;
 CREATE TABLE `aa_eesnimed` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `eesnimi` varchar(20) COLLATE utf8_estonian_ci NOT NULL,
@@ -264,7 +258,6 @@ CREATE TABLE `aa_eesnimed` (
 -- Table structure for table `aa_perenimed`
 --
 
-DROP TABLE IF EXISTS `aa_perenimed`;
 CREATE TABLE `aa_perenimed` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `perenimi` varchar(20) COLLATE utf8_estonian_ci NOT NULL,
@@ -283,7 +276,6 @@ CREATE TABLE `aa_perenimed` (
 -- Table structure for table `aa_synd`
 --
 
-DROP TABLE IF EXISTS `aa_synd`;
 CREATE TABLE `aa_synd` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `sünd` char(10) COLLATE utf8_estonian_ci NOT NULL,
@@ -299,7 +291,6 @@ CREATE TABLE `aa_synd` (
 -- Table structure for table `abez`
 --
 
-DROP TABLE IF EXISTS `abez`;
 CREATE TABLE `abez` (
   `Isikukood` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `Kirje` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -318,7 +309,6 @@ CREATE TABLE `abez` (
 -- Table structure for table `abistamiskomitee`
 --
 
-DROP TABLE IF EXISTS `abistamiskomitee`;
 CREATE TABLE `abistamiskomitee` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -341,7 +331,6 @@ CREATE TABLE `abistamiskomitee` (
 -- Table structure for table `acknowledgement`
 --
 
-DROP TABLE IF EXISTS `acknowledgement`;
 CREATE TABLE `acknowledgement` (
   `aid` int(11) NOT NULL AUTO_INCREMENT,
   `id` int(11) NOT NULL DEFAULT 0,
@@ -358,7 +347,6 @@ CREATE TABLE `acknowledgement` (
 -- Table structure for table `album_academicum`
 --
 
-DROP TABLE IF EXISTS `album_academicum`;
 CREATE TABLE `album_academicum` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -441,7 +429,6 @@ DELIMITER ;
 -- Table structure for table `alpha`
 --
 
-DROP TABLE IF EXISTS `alpha`;
 CREATE TABLE `alpha` (
   `sort` char(3) NOT NULL DEFAULT '',
   `symbol` varchar(4) NOT NULL DEFAULT '',
@@ -453,7 +440,6 @@ CREATE TABLE `alpha` (
 -- Table structure for table `counter`
 --
 
-DROP TABLE IF EXISTS `counter`;
 CREATE TABLE `counter` (
   `count` int(11) NOT NULL AUTO_INCREMENT,
   `time` datetime DEFAULT NULL,
@@ -464,7 +450,6 @@ CREATE TABLE `counter` (
 -- Table structure for table `el_kart`
 --
 
-DROP TABLE IF EXISTS `el_kart`;
 CREATE TABLE `el_kart` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `kirje` text COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -529,7 +514,6 @@ DELIMITER ;
 -- Temporary table structure for view `el_kart_view`
 --
 
-DROP TABLE IF EXISTS `el_kart_view`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `persoon`,
@@ -559,7 +543,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `eraf`
 --
 
-DROP TABLE IF EXISTS `eraf`;
 CREATE TABLE `eraf` (
   `leidandmed` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
   `pealkiri` text COLLATE utf8_estonian_ci NOT NULL,
@@ -572,7 +555,6 @@ CREATE TABLE `eraf` (
 -- Table structure for table `eraf_nimistu`
 --
 
-DROP TABLE IF EXISTS `eraf_nimistu`;
 CREATE TABLE `eraf_nimistu` (
   `toimik` varchar(255) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -611,7 +593,6 @@ CREATE TABLE `eraf_nimistu` (
 -- Temporary table structure for view `eraf_nimistu_v`
 --
 
-DROP TABLE IF EXISTS `eraf_nimistu_v`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `toimik`,
@@ -631,7 +612,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `eraf_nimistu_vastetega`
 --
 
-DROP TABLE IF EXISTS `eraf_nimistu_vastetega`;
 CREATE TABLE `eraf_nimistu_vastetega` (
   `toimik` varchar(255) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -671,7 +651,6 @@ CREATE TABLE `eraf_nimistu_vastetega` (
 -- Table structure for table `eraf_toimikunumbrid`
 --
 
-DROP TABLE IF EXISTS `eraf_toimikunumbrid`;
 CREATE TABLE `eraf_toimikunumbrid` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fond` varchar(5) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -687,7 +666,6 @@ CREATE TABLE `eraf_toimikunumbrid` (
 -- Table structure for table `erisurmaaktid`
 --
 
-DROP TABLE IF EXISTS `erisurmaaktid`;
 CREATE TABLE `erisurmaaktid` (
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
@@ -719,7 +697,6 @@ CREATE TABLE `erisurmaaktid` (
 -- Table structure for table `erisurmaaktid.bak`
 --
 
-DROP TABLE IF EXISTS `erisurmaaktid.bak`;
 CREATE TABLE `erisurmaaktid.bak` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `Nimekirjafail` char(50) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -744,7 +721,6 @@ CREATE TABLE `erisurmaaktid.bak` (
 -- Temporary table structure for view `erisurmaaktid_kivita`
 --
 
-DROP TABLE IF EXISTS `erisurmaaktid_kivita`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `emem_b`,
@@ -778,7 +754,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `f12sm`
 --
 
-DROP TABLE IF EXISTS `f12sm`;
 CREATE TABLE `f12sm` (
   `perenimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `eesnimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -795,7 +770,6 @@ CREATE TABLE `f12sm` (
 -- Table structure for table `haridustöötajad`
 --
 
-DROP TABLE IF EXISTS `haridustöötajad`;
 CREATE TABLE `haridustöötajad` (
   `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Perenimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -814,7 +788,6 @@ CREATE TABLE `haridustöötajad` (
 -- Table structure for table `hiidlased`
 --
 
-DROP TABLE IF EXISTS `hiidlased`;
 CREATE TABLE `hiidlased` (
   `ID` int(11) DEFAULT NULL,
   `Perenimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -839,7 +812,6 @@ CREATE TABLE `hiidlased` (
 -- Table structure for table `hpat`
 --
 
-DROP TABLE IF EXISTS `hpat`;
 CREATE TABLE `hpat` (
   `Nr` int(4) unsigned NOT NULL,
   `Isikukood` char(10) CHARACTER SET utf8 NOT NULL DEFAULT '',
@@ -902,7 +874,6 @@ CREATE TABLE `hpat` (
 -- Table structure for table `hukatud_41_44`
 --
 
-DROP TABLE IF EXISTS `hukatud_41_44`;
 CREATE TABLE `hukatud_41_44` (
   `nr` int(11) DEFAULT NULL,
   `perenimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -920,7 +891,6 @@ CREATE TABLE `hukatud_41_44` (
 -- Table structure for table `jeh`
 --
 
-DROP TABLE IF EXISTS `jeh`;
 CREATE TABLE `jeh` (
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `Kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -954,7 +924,6 @@ CREATE TABLE `jeh` (
 -- Table structure for table `kirmus4`
 --
 
-DROP TABLE IF EXISTS `kirmus4`;
 CREATE TABLE `kirmus4` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1008,7 +977,6 @@ DELIMITER ;
 -- Table structure for table `krossi_metsavennad`
 --
 
-DROP TABLE IF EXISTS `krossi_metsavennad`;
 CREATE TABLE `krossi_metsavennad` (
   `Kirjekood` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `Persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1036,7 +1004,6 @@ CREATE TABLE `krossi_metsavennad` (
 -- Temporary table structure for view `krossi_metsavennad_X_repis`
 --
 
-DROP TABLE IF EXISTS `krossi_metsavennad_X_repis`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
  1 AS `EMI_perenimi`,
@@ -1074,7 +1041,6 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `leinakuulutused`
 --
 
-DROP TABLE IF EXISTS `leinakuulutused`;
 CREATE TABLE `leinakuulutused` (
   `nr` smallint(6) NOT NULL,
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1141,7 +1107,6 @@ DELIMITER ;
 -- Table structure for table `lisakivid_l17_l20`
 --
 
-DROP TABLE IF EXISTS `lisakivid_l17_l20`;
 CREATE TABLE `lisakivid_l17_l20` (
   `persoon` varchar(10) COLLATE utf8_estonian_ci NOT NULL,
   `kirje` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
@@ -1167,7 +1132,6 @@ CREATE TABLE `lisakivid_l17_l20` (
 -- Table structure for table `matmispaigad`
 --
 
-DROP TABLE IF EXISTS `matmispaigad`;
 CREATE TABLE `matmispaigad` (
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT '',
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1194,7 +1158,6 @@ CREATE TABLE `matmispaigad` (
 -- Table structure for table `memo_ru`
 --
 
-DROP TABLE IF EXISTS `memo_ru`;
 CREATE TABLE `memo_ru` (
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
@@ -1218,7 +1181,6 @@ CREATE TABLE `memo_ru` (
 -- Table structure for table `memo_ru_html`
 --
 
-DROP TABLE IF EXISTS `memo_ru_html`;
 CREATE TABLE `memo_ru_html` (
   `person` mediumint(8) unsigned NOT NULL,
   `repr` tinyint(3) unsigned NOT NULL,
@@ -1273,7 +1235,6 @@ CREATE TABLE `memo_ru_html` (
 -- Table structure for table `memo_ru_perenimed`
 --
 
-DROP TABLE IF EXISTS `memo_ru_perenimed`;
 CREATE TABLE `memo_ru_perenimed` (
   `perenimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `cnt` int(11) DEFAULT NULL
@@ -1283,7 +1244,6 @@ CREATE TABLE `memo_ru_perenimed` (
 -- Table structure for table `memoriaal_evo`
 --
 
-DROP TABLE IF EXISTS `memoriaal_evo`;
 CREATE TABLE `memoriaal_evo` (
   `Kirje` varchar(55) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Auaste` enum('','k-adm','kapellmeister','kin','kin-ltn','kin-mjr','kol','kol-ltn','kpt','kpt-ltn','kpt-mjr','lpn','ltn','m-kpt','m-ltn','mjr','n-ltn','sjv ametnik','sjv arst','v-ltn') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1301,7 +1261,6 @@ CREATE TABLE `memoriaal_evo` (
 -- Table structure for table `memoriaal_evo_full`
 --
 
-DROP TABLE IF EXISTS `memoriaal_evo_full`;
 CREATE TABLE `memoriaal_evo_full` (
   `Auaste` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `Persoon` char(11) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1340,7 +1299,6 @@ CREATE TABLE `memoriaal_evo_full` (
 -- Table structure for table `memoriaal_kivitahvlid`
 --
 
-DROP TABLE IF EXISTS `memoriaal_kivitahvlid`;
 CREATE TABLE `memoriaal_kivitahvlid` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `kirje` varchar(47) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1366,7 +1324,6 @@ CREATE TABLE `memoriaal_kivitahvlid` (
 -- Table structure for table `memoriaal_kivitahvlid_A166_uus`
 --
 
-DROP TABLE IF EXISTS `memoriaal_kivitahvlid_A166_uus`;
 CREATE TABLE `memoriaal_kivitahvlid_A166_uus` (
   `id` int(10) unsigned NOT NULL DEFAULT 0,
   `kirje` varchar(43) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1388,7 +1345,6 @@ CREATE TABLE `memoriaal_kivitahvlid_A166_uus` (
 -- Table structure for table `memoriaal_kivitahvlid_A166_vana`
 --
 
-DROP TABLE IF EXISTS `memoriaal_kivitahvlid_A166_vana`;
 CREATE TABLE `memoriaal_kivitahvlid_A166_vana` (
   `id` int(10) unsigned NOT NULL DEFAULT 0,
   `kirje` varchar(43) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1410,7 +1366,6 @@ CREATE TABLE `memoriaal_kivitahvlid_A166_vana` (
 -- Table structure for table `memoriaal_kivitahvlid_A79`
 --
 
-DROP TABLE IF EXISTS `memoriaal_kivitahvlid_A79`;
 CREATE TABLE `memoriaal_kivitahvlid_A79` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `kirje` varchar(43) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -1435,7 +1390,6 @@ CREATE TABLE `memoriaal_kivitahvlid_A79` (
 -- Table structure for table `mu15_1`
 --
 
-DROP TABLE IF EXISTS `mu15_1`;
 CREATE TABLE `mu15_1` (
   `nr` int(11) DEFAULT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1452,7 +1406,6 @@ CREATE TABLE `mu15_1` (
 -- Table structure for table `mu16`
 --
 
-DROP TABLE IF EXISTS `mu16`;
 CREATE TABLE `mu16` (
   `nr` int(11) DEFAULT NULL,
   `persoon` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1470,7 +1423,6 @@ CREATE TABLE `mu16` (
 -- Table structure for table `mu17`
 --
 
-DROP TABLE IF EXISTS `mu17`;
 CREATE TABLE `mu17` (
   `nr` int(11) DEFAULT NULL,
   `persoon` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1488,7 +1440,6 @@ CREATE TABLE `mu17` (
 -- Table structure for table `mu18`
 --
 
-DROP TABLE IF EXISTS `mu18`;
 CREATE TABLE `mu18` (
   `nr` int(11) NOT NULL,
   `emi_id` int(11) DEFAULT NULL,
@@ -1504,7 +1455,6 @@ CREATE TABLE `mu18` (
 -- Table structure for table `pensionitoimikud`
 --
 
-DROP TABLE IF EXISTS `pensionitoimikud`;
 CREATE TABLE `pensionitoimikud` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1570,7 +1520,6 @@ DELIMITER ;
 -- Table structure for table `pereregister`
 --
 
-DROP TABLE IF EXISTS `pereregister`;
 CREATE TABLE `pereregister` (
   `id` int(11) unsigned NOT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1666,7 +1615,6 @@ DELIMITER ;
 -- Table structure for table `pr_eesnimed`
 --
 
-DROP TABLE IF EXISTS `pr_eesnimed`;
 CREATE TABLE `pr_eesnimed` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `eesnimi` varchar(20) COLLATE utf8_estonian_ci NOT NULL,
@@ -1685,7 +1633,6 @@ CREATE TABLE `pr_eesnimed` (
 -- Table structure for table `pr_perenimed`
 --
 
-DROP TABLE IF EXISTS `pr_perenimed`;
 CREATE TABLE `pr_perenimed` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `perenimi` varchar(20) COLLATE utf8_estonian_ci NOT NULL,
@@ -1704,7 +1651,6 @@ CREATE TABLE `pr_perenimed` (
 -- Table structure for table `pr_synd`
 --
 
-DROP TABLE IF EXISTS `pr_synd`;
 CREATE TABLE `pr_synd` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `sünd` char(10) COLLATE utf8_estonian_ci NOT NULL,
@@ -1720,7 +1666,6 @@ CREATE TABLE `pr_synd` (
 -- Table structure for table `r62_mittekyyd`
 --
 
-DROP TABLE IF EXISTS `r62_mittekyyd`;
 CREATE TABLE `r62_mittekyyd` (
   `nr` int(11) DEFAULT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1734,7 +1679,6 @@ CREATE TABLE `r62_mittekyyd` (
 -- Table structure for table `r86_triib`
 --
 
-DROP TABLE IF EXISTS `r86_triib`;
 CREATE TABLE `r86_triib` (
   `Jrk` int(11) DEFAULT NULL,
   `Eesnimi` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1763,7 +1707,6 @@ CREATE TABLE `r86_triib` (
 -- Table structure for table `rahvastikuregister`
 --
 
-DROP TABLE IF EXISTS `rahvastikuregister`;
 CREATE TABLE `rahvastikuregister` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1826,7 +1769,6 @@ DELIMITER ;
 -- Table structure for table `repr_kart`
 --
 
-DROP TABLE IF EXISTS `repr_kart`;
 CREATE TABLE `repr_kart` (
   `id` int(19) unsigned NOT NULL AUTO_INCREMENT,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1999,7 +1941,6 @@ DELIMITER ;
 -- Table structure for table `rk_toimikud`
 --
 
-DROP TABLE IF EXISTS `rk_toimikud`;
 CREATE TABLE `rk_toimikud` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `toimikuNr` varchar(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -2010,7 +1951,6 @@ CREATE TABLE `rk_toimikud` (
 -- Table structure for table `rr_v66rsil_surnud`
 --
 
-DROP TABLE IF EXISTS `rr_v66rsil_surnud`;
 CREATE TABLE `rr_v66rsil_surnud` (
   `jrk` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
@@ -2038,7 +1978,6 @@ CREATE TABLE `rr_v66rsil_surnud` (
 -- Table structure for table `swedish_death_index`
 --
 
-DROP TABLE IF EXISTS `swedish_death_index`;
 CREATE TABLE `swedish_death_index` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -2098,7 +2037,6 @@ DELIMITER ;
 -- Table structure for table `vanglasurmad`
 --
 
-DROP TABLE IF EXISTS `vanglasurmad`;
 CREATE TABLE `vanglasurmad` (
   `sakk` varchar(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kirjekood` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -2127,7 +2065,6 @@ CREATE TABLE `vanglasurmad` (
 -- Table structure for table `ve_lk`
 --
 
-DROP TABLE IF EXISTS `ve_lk`;
 CREATE TABLE `ve_lk` (
   `nr` smallint(6) NOT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -2151,7 +2088,6 @@ CREATE TABLE `ve_lk` (
 -- Table structure for table `wp_msyne_koonduslaager`
 --
 
-DROP TABLE IF EXISTS `wp_msyne_koonduslaager`;
 CREATE TABLE `wp_msyne_koonduslaager` (
   `ExcelId` int(11) NOT NULL,
   `Sugu` char(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,

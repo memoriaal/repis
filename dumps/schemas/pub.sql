@@ -16,7 +16,6 @@ USE `pub`;
 -- Table structure for table `nimekirjad`
 --
 
-DROP TABLE IF EXISTS `nimekirjad`;
 CREATE TABLE `nimekirjad` (
   `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `redirect` char(10) COLLATE utf8_estonian_ci DEFAULT '',
