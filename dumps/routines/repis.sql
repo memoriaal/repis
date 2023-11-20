@@ -15,6 +15,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `repis`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `repis` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_estonian_ci */;
+
+USE `repis`;
+
+--
 -- Dumping routines for database 'repis'
 --
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
@@ -2859,5 +2867,3 @@ DELIMITER ;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2023-11-20 19:16:39
