@@ -9,3 +9,10 @@
 -- Current Database: `aruanded`
 --
 
+
+USE `aruanded`;
+
+--
+-- Dumping routines for database 'aruanded'
+--
+
