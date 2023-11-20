@@ -11,6 +11,295 @@
 
 
 USE `repis`;
+
+--
+-- Temporary table structure for view `RR_kanded`
+--
+
+DROP TABLE IF EXISTS `RR_kanded`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `id`,
+  1 AS `ToimikId`,
+  1 AS `persoon`,
+  1 AS `Kirjed`,
+  1 AS `Eesnimi`,
+  1 AS `Perenimi`,
+  1 AS `Isanimi`,
+  1 AS `Surm`,
+  1 AS `Sugu`,
+  1 AS `Surmakoht`,
+  1 AS `Rahvus`,
+  1 AS `Märkus`,
+  1 AS `Alusdokument`,
+  1 AS `xml` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `RR_kanded_xml`
+--
+
+DROP TABLE IF EXISTS `RR_kanded_xml`;
+CREATE TABLE `RR_kanded_xml` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `xml` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `_deprecated_emadisad`
+--
+
+DROP TABLE IF EXISTS `_deprecated_emadisad`;
+CREATE TABLE `_deprecated_emadisad` (
+  `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `ema` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `isa` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `abikaasa` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kasuema` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kasuisa` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `updated_by` varchar(40) COLLATE utf8_estonian_ci NOT NULL DEFAULT '-',
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`persoon`),
+  KEY `ema` (`ema`),
+  KEY `isa` (`isa`),
+  KEY `abikaasa` (`abikaasa`),
+  KEY `kasuema` (`kasuema`),
+  KEY `kasuisa` (`kasuisa`),
+  CONSTRAINT `_deprecated_emadisad_ibfk_1` FOREIGN KEY (`persoon`) REFERENCES `kirjed` (`kirjekood`),
+  CONSTRAINT `_deprecated_emadisad_ibfk_4` FOREIGN KEY (`abikaasa`) REFERENCES `kirjed` (`kirjekood`),
+  CONSTRAINT `_deprecated_emadisad_ibfk_5` FOREIGN KEY (`kasuema`) REFERENCES `kirjed` (`kirjekood`),
+  CONSTRAINT `_deprecated_emadisad_ibfk_6` FOREIGN KEY (`kasuisa`) REFERENCES `kirjed` (`kirjekood`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `a_kirjed`
+--
+
+DROP TABLE IF EXISTS `a_kirjed`;
+CREATE TABLE `a_kirjed` (
+  `Persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
+  `Kirjed` mediumtext COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`Persoon`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `a_lipikud`
+--
+
+DROP TABLE IF EXISTS `a_lipikud`;
+CREATE TABLE `a_lipikud` (
+  `Persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
+  `Lipikud` mediumtext COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`Persoon`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Temporary table structure for view `a_persoonid`
+--
+
+DROP TABLE IF EXISTS `a_persoonid`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `persoon`,
+  1 AS `perenimi`,
+  1 AS `eesnimi`,
+  1 AS `isanimi`,
+  1 AS `emanimi`,
+  1 AS `sünd`,
+  1 AS `surm`,
+  1 AS `kirjed`,
+  1 AS `lipikud`,
+  1 AS `sildid`,
+  1 AS `kommentaar` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `a_sildid`
+--
+
+DROP TABLE IF EXISTS `a_sildid`;
+CREATE TABLE `a_sildid` (
+  `Persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
+  `Sildid` mediumtext COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`Persoon`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `allikad`
+--
+
+DROP TABLE IF EXISTS `allikad`;
+CREATE TABLE `allikad` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nonPerson` bit(1) NOT NULL DEFAULT b'0',
+  `isFilter` bit(1) NOT NULL DEFAULT b'0',
+  `Allikas` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Nimetus` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Kood` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  `Lühend` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Avaldatud` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Nimekiri` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Kirjeid allikas` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Kirjeid imporditud` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Kirjeldus` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Andmeväljad` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Kommentaar` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `prioriteetPerenimi` int(5) unsigned NOT NULL DEFAULT 10000,
+  `prioriteetEesnimi` int(5) unsigned NOT NULL DEFAULT 10000,
+  `prioriteetIsanimi` int(5) unsigned NOT NULL DEFAULT 10000,
+  `prioriteetEmanimi` int(5) unsigned NOT NULL DEFAULT 10000,
+  `prioriteetSünd` int(5) unsigned NOT NULL DEFAULT 10000,
+  `prioriteetSurm` int(5) unsigned NOT NULL DEFAULT 10000,
+  `prioriteetKirje` int(5) unsigned NOT NULL DEFAULT 10000,
+  `Küüdiaasta` char(4) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`Kood`),
+  KEY `Index 2` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `asukohad`
+--
+
+DROP TABLE IF EXISTS `asukohad`;
+CREATE TABLE `asukohad` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `Nimetus` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Liik` enum('','Administratiivüksus','Vangilaager','Vangla','Asumispaik','Laager','Alias') COLLATE utf8_estonian_ci NOT NULL DEFAULT 'Administratiivüksus',
+  `Alamliik` enum('','ANSV','krai','kreis','küla','vald','linn','NSV','oblast','rajoon') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimekuju` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Originaalnimi` varchar(250) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Kirjeldus` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Asukoht` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Nimetus` (`Nimetus`,`Liik`,`Asukoht`,`Alamliik`) USING BTREE,
+  KEY `asukohad_ibfk_1` (`Asukoht`),
+  CONSTRAINT `asukohad_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2654 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `c_lipikud`
+--
+
+DROP TABLE IF EXISTS `c_lipikud`;
+CREATE TABLE `c_lipikud` (
+  `lipik` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `selgitus` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`lipik`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `c_seoseliigid`
+--
+
+DROP TABLE IF EXISTS `c_seoseliigid`;
+CREATE TABLE `c_seoseliigid` (
+  `seoseliik` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `sugu` enum('','M','N') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `sugu_1` enum('','M','N','=','X') COLLATE utf8_estonian_ci DEFAULT NULL,
+  `seoseliik_1M` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `seoseliik_1N` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `seoseliik_1X` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`seoseliik`),
+  KEY `seoseliik_1` (`seoseliik_1M`),
+  KEY `seoseliik_1N` (`seoseliik_1N`),
+  KEY `seoseliik_1X` (`seoseliik_1X`),
+  CONSTRAINT `c_seoseliigid_ibfk_1` FOREIGN KEY (`seoseliik_1M`) REFERENCES `c_seoseliigid` (`seoseliik`) ON UPDATE CASCADE,
+  CONSTRAINT `c_seoseliigid_ibfk_2` FOREIGN KEY (`seoseliik_1N`) REFERENCES `c_seoseliigid` (`seoseliik`) ON UPDATE CASCADE,
+  CONSTRAINT `c_seoseliigid_ibfk_3` FOREIGN KEY (`seoseliik_1X`) REFERENCES `c_seoseliigid` (`seoseliik`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `c_sildid`
+--
+
+DROP TABLE IF EXISTS `c_sildid`;
+CREATE TABLE `c_sildid` (
+  `silt` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `selgitus` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`silt`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `counter`
+--
+
+DROP TABLE IF EXISTS `counter`;
+CREATE TABLE `counter` (
+  `id` varchar(20) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `value` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `desk_lipikud`
+--
+
+DROP TABLE IF EXISTS `desk_lipikud`;
+CREATE TABLE `desk_lipikud` (
+  `desktop_id` int(10) unsigned NOT NULL,
+  `lipik` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  PRIMARY KEY (`desktop_id`,`lipik`),
+  KEY `lipik` (`lipik`),
+  CONSTRAINT `desk_lipikud_ibfk_1` FOREIGN KEY (`desktop_id`) REFERENCES `desktop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `desk_lipikud_ibfk_2` FOREIGN KEY (`lipik`) REFERENCES `c_lipikud` (`lipik`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `desk_sildid`
+--
+
+DROP TABLE IF EXISTS `desk_sildid`;
+CREATE TABLE `desk_sildid` (
+  `desktop_id` int(10) unsigned NOT NULL,
+  `silt` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  PRIMARY KEY (`desktop_id`,`silt`),
+  KEY `silt` (`silt`),
+  CONSTRAINT `desk_sildid_ibfk_1` FOREIGN KEY (`desktop_id`) REFERENCES `desktop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `desk_sildid_ibfk_2` FOREIGN KEY (`silt`) REFERENCES `c_sildid` (`silt`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `desktop`
+--
+
+DROP TABLE IF EXISTS `desktop`;
+CREATE TABLE `desktop` (
+  `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `valmis` enum('Valmis','','Untsus') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `jutt` text COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `perenimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `eesnimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `isanimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `emanimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `sünd` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `sünnikoht` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `surm` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `surmakoht` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `matmisaeg` varchar(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `elukoht` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `matmiskoht` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `surma põhjus` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `lipik` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `lipikud` text COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `silt` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `sildid` text COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kirje` text COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `legend` text COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `välisviide` varchar(2000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `allikas` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`kirjekood`,`created_by`),
+  UNIQUE KEY `id` (`id`),
+  KEY `lipik` (`lipik`),
+  KEY `silt` (`silt`),
+  CONSTRAINT `desktop_ibfk_1` FOREIGN KEY (`lipik`) REFERENCES `c_lipikud` (`lipik`) ON UPDATE CASCADE,
+  CONSTRAINT `desktop_ibfk_2` FOREIGN KEY (`silt`) REFERENCES `c_sildid` (`silt`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=285168 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
 
     IF NEW.created_by = '' THEN
@@ -379,6 +668,30 @@ DELIMITER ;;
 
   END */;;
 DELIMITER ;
+
+--
+-- Table structure for table `emaisalaud`
+--
+
+DROP TABLE IF EXISTS `emaisalaud`;
+CREATE TABLE `emaisalaud` (
+  `A` enum('','Valmis') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kirjed` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `ema` varchar(1000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `isa` varchar(1000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `abikaasa` varchar(1000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kasuema` varchar(1000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kasuisa` varchar(1000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `emakirjed` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `isakirjed` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `abikaasakirjed` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kasuisakirjed` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kasuemakirjed` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`persoon`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
   proc_label:BEGIN
 
@@ -602,6 +915,126 @@ DELIMITER ;;
 
   END */;;
 DELIMITER ;
+
+--
+-- Table structure for table `episoodid`
+--
+
+DROP TABLE IF EXISTS `episoodid`;
+CREATE TABLE `episoodid` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `Kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimetus` enum('','Arreteerimine','Vangistus','Küüditamine','Matmispaik','Asumise algus','Asumiselt vabanemine','Laager','Surm','Vangilaager','Elukoht') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Aeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
+  `Asukoht` int(11) unsigned DEFAULT NULL,
+  `Väärtus` varchar(50) COLLATE utf8_estonian_ci DEFAULT '',
+  `Kinnitatud` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`) USING BTREE,
+  KEY `Asukoht` (`Asukoht`) USING BTREE,
+  CONSTRAINT `episoodid_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=163838 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Table structure for table `episoodid_0`
+--
+
+DROP TABLE IF EXISTS `episoodid_0`;
+CREATE TABLE `episoodid_0` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `Kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Aeg` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Asukoht` int(11) unsigned DEFAULT NULL,
+  `Nimetus` enum('','Arreteerimine','Vangistus','Küüditamine','Matmispaik','Asumise algus','Asumiselt vabanemine','Laager','Surm','Vangilaager') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kinnitatud` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`),
+  KEY `Asukoht` (`Asukoht`),
+  CONSTRAINT `episoodid_0_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=235450 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `failid`
+--
+
+DROP TABLE IF EXISTS `failid`;
+CREATE TABLE `failid` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT '',
+  `fail` longblob NOT NULL,
+  `failinimi` varchar(100) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=949 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `fondid`
+--
+
+DROP TABLE IF EXISTS `fondid`;
+CREATE TABLE `fondid` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Arhiiv` varchar(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Fond` varchar(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimistu` varchar(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Arhiiv` (`Arhiiv`,`Fond`,`Nimistu`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `kirjed`
+--
+
+DROP TABLE IF EXISTS `kirjed`;
+CREATE TABLE `kirjed` (
+  `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Kirje` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Perenimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Eesnimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Isanimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Emanimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Sünd` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Sünnikoht` varchar(100) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Surm` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Surmakoht` varchar(100) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Lipikud` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Sildid` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `RaamatuPere` varchar(25) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `LeidPere` int(10) unsigned DEFAULT NULL,
+  `Sugu` enum('M','N','') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Rahvus` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Välisviide` varchar(2000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Kommentaar` varchar(2000) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Allikas` varchar(20) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimekiri` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kustuta` char(1) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `legend` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `KirjePersoon` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `KirjeJutt` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Elukoht` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Surma põhjus` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Matmiskoht` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Matmisaeg` varchar(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `pub_emem` bit(1) NOT NULL DEFAULT b'0',
+  `pub_kivi` bit(1) NOT NULL DEFAULT b'0',
+  `pub_wwiiref` bit(1) NOT NULL DEFAULT b'0',
+  `pub_evo` bit(1) NOT NULL DEFAULT b'0',
+  `pub_mv` bit(1) NOT NULL DEFAULT b'0',
+  `pub_isPerson` bit(1) NOT NULL DEFAULT b'1',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_by` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`kirjekood`),
+  KEY `persoon_persoon` (`persoon`),
+  KEY `persoon_allikas` (`Allikas`),
+  KEY `Perekood` (`RaamatuPere`),
+  KEY `Sünd` (`Sünd`,`Eesnimi`),
+  KEY `Eesnimi` (`Eesnimi`,`Sünd`),
+  KEY `Perenimi` (`Perenimi`,`Eesnimi`) USING BTREE,
+  CONSTRAINT `kirjed_allika_fk_allikas_kood` FOREIGN KEY (`Allikas`) REFERENCES `allikad` (`Kood`) ON UPDATE CASCADE,
+  CONSTRAINT `kirjed_persoon_fk_kirjed_kirjekood` FOREIGN KEY (`persoon`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
 
     DECLARE msg VARCHAR(2000);
@@ -753,6 +1186,302 @@ DELIMITER ;;
 	
 END */;;
 DELIMITER ;
+
+--
+-- Temporary table structure for view `kirjed_v`
+--
+
+DROP TABLE IF EXISTS `kirjed_v`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `persoon`,
+  1 AS `kirjekood`,
+  1 AS `Kirje`,
+  1 AS `kirjed`,
+  1 AS `Perenimed`,
+  1 AS `Perenimi`,
+  1 AS `Eesnimi`,
+  1 AS `Isanimi`,
+  1 AS `Emanimi`,
+  1 AS `Sünd`,
+  1 AS `Sünnikoht`,
+  1 AS `Surm`,
+  1 AS `Surmakoht`,
+  1 AS `Allikas`,
+  1 AS `Allikad`,
+  1 AS `Lipikud`,
+  1 AS `Sildid`,
+  1 AS `RaamatuPere`,
+  1 AS `LeidPere`,
+  1 AS `Sugu`,
+  1 AS `Rahvus`,
+  1 AS `Välisviide`,
+  1 AS `Kommentaar`,
+  1 AS `Puudulik`,
+  1 AS `EkslikKanne`,
+  1 AS `Peatatud`,
+  1 AS `EiArvesta`,
+  1 AS `kustuta`,
+  1 AS `legend`,
+  1 AS `KirjePersoon`,
+  1 AS `KirjeJutt`,
+  1 AS `Elukoht`,
+  1 AS `Surma põhjus`,
+  1 AS `Matmiskoht`,
+  1 AS `Matmisaeg`,
+  1 AS `pub_emem`,
+  1 AS `pub_kivi`,
+  1 AS `pub_wwiiref`,
+  1 AS `pub_evo`,
+  1 AS `pub_mv`,
+  1 AS `pub_isPerson`,
+  1 AS `created_at`,
+  1 AS `created_by`,
+  1 AS `updated_at`,
+  1 AS `updated_by` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `kirjete_toimikud`
+--
+
+DROP TABLE IF EXISTS `kirjete_toimikud`;
+CREATE TABLE `kirjete_toimikud` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `toimik` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `viide` varchar(255) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `säilik` varchar(8) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `fond` varchar(5) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kirjekood` (`kirjekood`),
+  KEY `toimik` (`toimik`) USING BTREE,
+  KEY `persoon` (`persoon`),
+  KEY `säilik` (`säilik`) USING BTREE,
+  KEY `fond` (`fond`),
+  CONSTRAINT `kirjete_toimikud_ibfk_1` FOREIGN KEY (`kirjekood`) REFERENCES `kirjed` (`kirjekood`)
+) ENGINE=InnoDB AUTO_INCREMENT=125992 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `log_msg`
+--
+
+DROP TABLE IF EXISTS `log_msg`;
+CREATE TABLE `log_msg` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `k` varchar(255) COLLATE utf8_estonian_ci DEFAULT '',
+  `msg` varchar(255) COLLATE utf8_estonian_ci DEFAULT '',
+  `src` varchar(25) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `usr` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `tm` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `Index 2` (`src`)
+) ENGINE=InnoDB AUTO_INCREMENT=225192 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `massuuendused`
+--
+
+DROP TABLE IF EXISTS `massuuendused`;
+CREATE TABLE `massuuendused` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `valmis` timestamp NULL DEFAULT NULL,
+  `ülesanne` text CHARACTER SET utf8 DEFAULT NULL,
+  `SQL` text CHARACTER SET utf8 DEFAULT NULL,
+  `silt` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `lipik` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Temporary table structure for view `my_desktop`
+--
+
+DROP TABLE IF EXISTS `my_desktop`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `persoon`,
+  1 AS `kirjekood`,
+  1 AS `valmis`,
+  1 AS `jutt`,
+  1 AS `perenimi`,
+  1 AS `eesnimi`,
+  1 AS `isanimi`,
+  1 AS `emanimi`,
+  1 AS `sünd`,
+  1 AS `sünnikoht`,
+  1 AS `surm`,
+  1 AS `surmakoht`,
+  1 AS `matmisaeg`,
+  1 AS `elukoht`,
+  1 AS `matmiskoht`,
+  1 AS `surma põhjus`,
+  1 AS `Peatatud`,
+  1 AS `EiArvesta`,
+  1 AS `lipik`,
+  1 AS `lipikud`,
+  1 AS `silt`,
+  1 AS `sildid`,
+  1 AS `kirje`,
+  1 AS `legend`,
+  1 AS `välisviide`,
+  1 AS `allikas`,
+  1 AS `EkslikKanne`,
+  1 AS `Kustuta`,
+  1 AS `created_at`,
+  1 AS `created_by` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `nimekirjad`
+--
+
+DROP TABLE IF EXISTS `nimekirjad`;
+CREATE TABLE `nimekirjad` (
+  `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL,
+  `isPerson` bit(1) NOT NULL DEFAULT b'0',
+  `kivi` bit(1) NOT NULL DEFAULT b'0',
+  `emem` bit(1) NOT NULL DEFAULT b'1',
+  `evo` bit(1) NOT NULL DEFAULT b'0',
+  `wwiiref` bit(1) NOT NULL DEFAULT b'0',
+  `kirjed` longtext COLLATE utf8_estonian_ci NOT NULL DEFAULT '[]',
+  `pereseosed` longtext COLLATE utf8_estonian_ci NOT NULL DEFAULT '[]',
+  PRIMARY KEY (`persoon`) USING BTREE,
+  CONSTRAINT `FK_nimekirjad_repis.kirjed` FOREIGN KEY (`persoon`) REFERENCES `kirjed` (`kirjekood`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `CONSTRAINT_1` CHECK (json_valid(`kirjed`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci COMMENT='Persoonide kuulumine erinevatesse avaldatud nimekirjadesse';
+
+--
+-- Temporary table structure for view `persoonide_represseerimised`
+--
+
+DROP TABLE IF EXISTS `persoonide_represseerimised`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `persoon`,
+  1 AS `kirje`,
+  1 AS `kirjekood`,
+  1 AS `repressioon`,
+  1 AS `kp` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `persoonikirjed`
+--
+
+DROP TABLE IF EXISTS `persoonikirjed`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `persoon`,
+  1 AS `perenimi`,
+  1 AS `eesnimi`,
+  1 AS `isanimi`,
+  1 AS `emanimi`,
+  1 AS `sünd`,
+  1 AS `surm`,
+  1 AS `kirjed`,
+  1 AS `group_concat(distinct ks.silt)` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `r86persoonid`
+--
+
+DROP TABLE IF EXISTS `r86persoonid`;
+CREATE TABLE `r86persoonid` (
+  `persoonikood` varchar(255) COLLATE utf8_estonian_ci NOT NULL,
+  PRIMARY KEY (`persoonikood`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `represseerimised`
+--
+
+DROP TABLE IF EXISTS `represseerimised`;
+CREATE TABLE `represseerimised` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `repressioon` enum('Arreteerimine','Küüditamine','Mitteküüditatud') COLLATE utf8_estonian_ci NOT NULL DEFAULT 'Arreteerimine',
+  `kp` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kirjekood` (`kirjekood`,`repressioon`,`kp`)
+) ENGINE=InnoDB AUTO_INCREMENT=197677 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Temporary table structure for view `represseeritud`
+--
+
+DROP TABLE IF EXISTS `represseeritud`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+ 1 AS `persoon`,
+  1 AS `kirjekood`,
+  1 AS `Kirjed`,
+  1 AS `Perenimi`,
+  1 AS `Eesnimi`,
+  1 AS `Isanimi`,
+  1 AS `Emanimi`,
+  1 AS `Sünd`,
+  1 AS `repressioonid`,
+  1 AS `Surm`,
+  1 AS `Sildid`,
+  1 AS `Lipikud`,
+  1 AS `RaamatuPere`,
+  1 AS `LeidPere`,
+  1 AS `Sugu`,
+  1 AS `Rahvus`,
+  1 AS `Välisviide`,
+  1 AS `Kommentaar`,
+  1 AS `Puudulik`,
+  1 AS `EkslikKanne`,
+  1 AS `Peatatud`,
+  1 AS `EiArvesta`,
+  1 AS `kustuta`,
+  1 AS `legend` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `seosed`
+--
+
+DROP TABLE IF EXISTS `seosed`;
+CREATE TABLE `seosed` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `kirjekood1` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `seos` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `vastasseos` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kirjekood2` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kirjekood1` (`kirjekood1`,`seos`,`vastasseos`,`kirjekood2`),
+  KEY `seos` (`seos`),
+  KEY `vastasseos` (`vastasseos`),
+  KEY `kirjekood2` (`kirjekood2`),
+  KEY `kirjekood1_2` (`kirjekood1`,`kirjekood2`,`seos`),
+  CONSTRAINT `seosed_ibfk_1` FOREIGN KEY (`seos`) REFERENCES `c_seoseliigid` (`seoseliik`) ON UPDATE CASCADE,
+  CONSTRAINT `seosed_ibfk_4` FOREIGN KEY (`vastasseos`) REFERENCES `c_seoseliigid` (`seoseliik`) ON UPDATE CASCADE,
+  CONSTRAINT `seosed_ibfk_5` FOREIGN KEY (`kirjekood1`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE,
+  CONSTRAINT `seosed_ibfk_6` FOREIGN KEY (`kirjekood2`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1026 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `sugulased`
+--
+
+DROP TABLE IF EXISTS `sugulased`;
+CREATE TABLE `sugulased` (
+  `persoon` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `seos` varchar(25) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `sugulane` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `created_by` varchar(20) COLLATE utf8_estonian_ci NOT NULL DEFAULT '-',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`persoon`,`seos`,`sugulane`),
+  KEY `sugulane` (`sugulane`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
 
 	CALL pub.2pub(new.persoon);
@@ -767,4 +1496,116 @@ DELIMITER ;;
 
 END */;;
 DELIMITER ;
+
+--
+-- Table structure for table `v_kirjelipikud`
+--
+
+DROP TABLE IF EXISTS `v_kirjelipikud`;
+CREATE TABLE `v_kirjelipikud` (
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `lipik` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `aeg` varchar(21) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_by` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`kirjekood`,`lipik`,`aeg`,`deleted_at`),
+  KEY `lipik` (`lipik`),
+  CONSTRAINT `v_kirjelipikud_ibfk_1` FOREIGN KEY (`lipik`) REFERENCES `c_lipikud` (`lipik`),
+  CONSTRAINT `v_kirjelipikud_ibfk_2` FOREIGN KEY (`kirjekood`) REFERENCES `kirjed` (`kirjekood`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `v_kirjesildid`
+--
+
+DROP TABLE IF EXISTS `v_kirjesildid`;
+CREATE TABLE `v_kirjesildid` (
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `silt` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_by` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`kirjekood`,`silt`,`deleted_at`),
+  KEY `silt` (`silt`),
+  CONSTRAINT `v_kirjesildid_ibfk_1` FOREIGN KEY (`silt`) REFERENCES `c_sildid` (`silt`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `v_kirjesildid_ibfk_2` FOREIGN KEY (`kirjekood`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `z_datefix`
+--
+
+DROP TABLE IF EXISTS `z_datefix`;
+CREATE TABLE `z_datefix` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `re` varchar(255) COLLATE utf8_estonian_ci NOT NULL DEFAULT '^[0-9]{4}\\\\-[0-9]{2}\\\\-[0-9]{2}$',
+  `sep` char(1) COLLATE utf8_estonian_ci NOT NULL DEFAULT '-',
+  `y` tinyint(4) NOT NULL DEFAULT 1,
+  `m` tinyint(4) NOT NULL DEFAULT 2,
+  `d` tinyint(4) NOT NULL DEFAULT 3,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Table structure for table `z_queue`
+--
+
+DROP TABLE IF EXISTS `z_queue`;
+CREATE TABLE `z_queue` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `kirjekood1` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `kirjekood2` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `task` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  `params` varchar(500) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `erred_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `msg` varchar(100) COLLATE utf8_estonian_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kirjekood1` (`kirjekood1`,`kirjekood2`,`task`,`params`,`erred_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Current Database: `repis`
+--
+
+USE `repis`;
+
+--
+-- Final view structure for view `RR_kanded`
+--
+
+
+--
+-- Final view structure for view `a_persoonid`
+--
+
+
+--
+-- Final view structure for view `kirjed_v`
+--
+
+
+--
+-- Final view structure for view `my_desktop`
+--
+
+
+--
+-- Final view structure for view `persoonide_represseerimised`
+--
+
+
+--
+-- Final view structure for view `persoonikirjed`
+--
+
+
+--
+-- Final view structure for view `represseeritud`
+--
+
 
