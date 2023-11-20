@@ -283,7 +283,7 @@ CREATE TABLE `desktop` (
   KEY `silt` (`silt`),
   CONSTRAINT `desktop_ibfk_1` FOREIGN KEY (`lipik`) REFERENCES `c_lipikud` (`lipik`) ON UPDATE CASCADE,
   CONSTRAINT `desktop_ibfk_2` FOREIGN KEY (`silt`) REFERENCES `c_sildid` (`silt`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=285168 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=285178 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
 
     IF NEW.created_by = '' THEN
@@ -1252,7 +1252,7 @@ CREATE TABLE `log_msg` (
   `tm` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `Index 2` (`src`)
-) ENGINE=InnoDB AUTO_INCREMENT=225534 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=225677 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `massuuendused`
@@ -1527,7 +1527,7 @@ CREATE TABLE `z_queue` (
   `msg` varchar(100) COLLATE utf8_estonian_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kirjekood1` (`kirjekood1`,`kirjekood2`,`task`,`params`,`erred_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Current Database: `repis`
