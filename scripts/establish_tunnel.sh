@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Load environment variables
-current_dir="$(dirname "$0")"
-source "$current_dir/../.env"
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source "$script_dir/../.env"
 
 # Check if SSH tunnel is already established
 if nc -z localhost $SSH_LOCAL_PORT; then
