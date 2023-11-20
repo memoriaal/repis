@@ -1,13 +1,13 @@
 #!/bin/bash
 
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+root_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-. "$script_dir/scripts/establish_tunnel.sh"
+. "$root_dir/scripts/establish_tunnel.sh"
 
-. "$script_dir/scripts/dump_schemas.sh"
-. "$script_dir/scripts/dump_routines.sh"
+. "$root_dir/scripts/dump_schemas.sh"
+. "$root_dir/scripts/dump_routines.sh"
 
-. "$script_dir/scripts/close_tunnel.sh"
+. "$root_dir/scripts/close_tunnel.sh"
 
 # commit changes
 git add .
