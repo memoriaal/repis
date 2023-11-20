@@ -11,7 +11,7 @@ source "$script_dir/../.env"
 # Iterate over all $MYSQL_DATABASES
 
 if nc -z localhost $SSH_LOCAL_PORT; then
-  for db in $MYSQL_DATABASES; do
+  for db in ${MYSQL_DATABASES[@]}; do
     echo "Dumping routines for database ${db}..."
     mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --databases ${db} --routines --no-create-info --no-data --skip-triggers > dumps/routines/${db}.sql
     echo "Dumped routines for database ${db}."
