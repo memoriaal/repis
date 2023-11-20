@@ -1,4 +1,4 @@
-now=`mysql --port=3306 -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" pub<<EOFMYSQL
+now=`mysql --port=3306 -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" –protocol tcp pub<<EOFMYSQL
 select now();
 EOFMYSQL
 `
