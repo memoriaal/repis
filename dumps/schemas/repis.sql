@@ -43,7 +43,7 @@ CREATE TABLE `RR_kanded_xml` (
   `xml` text COLLATE utf8_estonian_ci DEFAULT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `_deprecated_emadisad`
@@ -148,7 +148,7 @@ CREATE TABLE `allikad` (
   `Küüdiaasta` char(4) COLLATE utf8_estonian_ci DEFAULT NULL,
   PRIMARY KEY (`Kood`),
   KEY `Index 2` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `asukohad`
@@ -167,7 +167,7 @@ CREATE TABLE `asukohad` (
   UNIQUE KEY `Nimetus` (`Nimetus`,`Liik`,`Asukoht`,`Alamliik`) USING BTREE,
   KEY `asukohad_ibfk_1` (`Asukoht`),
   CONSTRAINT `asukohad_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2654 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `c_lipikud`
@@ -283,7 +283,7 @@ CREATE TABLE `desktop` (
   KEY `silt` (`silt`),
   CONSTRAINT `desktop_ibfk_1` FOREIGN KEY (`lipik`) REFERENCES `c_lipikud` (`lipik`) ON UPDATE CASCADE,
   CONSTRAINT `desktop_ibfk_2` FOREIGN KEY (`silt`) REFERENCES `c_sildid` (`silt`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=285178 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
 
     IF NEW.created_by = '' THEN
@@ -915,7 +915,7 @@ CREATE TABLE `episoodid` (
   UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`) USING BTREE,
   KEY `Asukoht` (`Asukoht`) USING BTREE,
   CONSTRAINT `episoodid_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=163838 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Table structure for table `episoodid_0`
@@ -932,7 +932,7 @@ CREATE TABLE `episoodid_0` (
   UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`),
   KEY `Asukoht` (`Asukoht`),
   CONSTRAINT `episoodid_0_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=235450 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `failid`
@@ -944,7 +944,7 @@ CREATE TABLE `failid` (
   `fail` longblob NOT NULL,
   `failinimi` varchar(100) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=949 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `fondid`
@@ -957,7 +957,7 @@ CREATE TABLE `fondid` (
   `Nimistu` varchar(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Arhiiv` (`Arhiiv`,`Fond`,`Nimistu`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `kirjed`
@@ -1237,7 +1237,7 @@ CREATE TABLE `kirjete_toimikud` (
   KEY `säilik` (`säilik`) USING BTREE,
   KEY `fond` (`fond`),
   CONSTRAINT `kirjete_toimikud_ibfk_1` FOREIGN KEY (`kirjekood`) REFERENCES `kirjed` (`kirjekood`)
-) ENGINE=InnoDB AUTO_INCREMENT=125992 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `log_msg`
@@ -1252,7 +1252,7 @@ CREATE TABLE `log_msg` (
   `tm` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `Index 2` (`src`)
-) ENGINE=InnoDB AUTO_INCREMENT=229552 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `massuuendused`
@@ -1268,7 +1268,7 @@ CREATE TABLE `massuuendused` (
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Temporary table structure for view `my_desktop`
@@ -1376,7 +1376,7 @@ CREATE TABLE `represseerimised` (
   `kp` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `kirjekood` (`kirjekood`,`repressioon`,`kp`)
-) ENGINE=InnoDB AUTO_INCREMENT=197677 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Temporary table structure for view `represseeritud`
@@ -1432,7 +1432,7 @@ CREATE TABLE `seosed` (
   CONSTRAINT `seosed_ibfk_4` FOREIGN KEY (`vastasseos`) REFERENCES `c_seoseliigid` (`seoseliik`) ON UPDATE CASCADE,
   CONSTRAINT `seosed_ibfk_5` FOREIGN KEY (`kirjekood1`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE,
   CONSTRAINT `seosed_ibfk_6` FOREIGN KEY (`kirjekood2`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1026 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `sugulased`
@@ -1509,7 +1509,7 @@ CREATE TABLE `z_datefix` (
   `m` tinyint(4) NOT NULL DEFAULT 2,
   `d` tinyint(4) NOT NULL DEFAULT 3,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `z_queue`
@@ -1527,7 +1527,7 @@ CREATE TABLE `z_queue` (
   `msg` varchar(100) COLLATE utf8_estonian_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kirjekood1` (`kirjekood1`,`kirjekood2`,`task`,`params`,`erred_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=832 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Current Database: `repis`

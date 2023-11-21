@@ -341,7 +341,7 @@ CREATE TABLE `acknowledgement` (
   `ack_src` text DEFAULT NULL,
   PRIMARY KEY (`aid`),
   KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3095 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `album_academicum`
@@ -444,7 +444,7 @@ CREATE TABLE `counter` (
   `count` int(11) NOT NULL AUTO_INCREMENT,
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`count`)
-) ENGINE=InnoDB AUTO_INCREMENT=27592284 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `el_kart`
@@ -660,7 +660,7 @@ CREATE TABLE `eraf_toimikunumbrid` (
   `pealkiri` varchar(102) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `Index 2` (`säilik`,`vana_nr`)
-) ENGINE=InnoDB AUTO_INCREMENT=65536 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `erisurmaaktid`
@@ -1318,7 +1318,7 @@ CREATE TABLE `memoriaal_kivitahvlid` (
   KEY `search` (`kirje`),
   KEY `kirjekood` (`kirjekood`),
   KEY `persoon` (`persoon`)
-) ENGINE=InnoDB AUTO_INCREMENT=24512 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `memoriaal_kivitahvlid_A166_uus`
@@ -1384,7 +1384,7 @@ CREATE TABLE `memoriaal_kivitahvlid_A79` (
   PRIMARY KEY (`id`),
   KEY `search` (`kirje`),
   KEY `persoon` (`persoon`)
-) ENGINE=InnoDB AUTO_INCREMENT=22230 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `mu15_1`
@@ -1902,7 +1902,7 @@ CREATE TABLE `repr_kart` (
   UNIQUE KEY `isikukood` (`isikukood`),
   KEY `EesnimiC` (`EesnimiC`,`PerenimiC`),
   KEY `persoon` (`persoon`)
-) ENGINE=InnoDB AUTO_INCREMENT=106503 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 DELIMITER ;;
 	if true then
 	   IF NEW.persoon = '0' THEN
@@ -2142,7 +2142,7 @@ CREATE TABLE `wp_msyne_koonduslaager` (
   `TeisedLaagrid` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3994 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Current Database: `import`
