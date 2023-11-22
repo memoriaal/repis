@@ -9,6 +9,7 @@ git pull
 
 . "${root_dir}/scripts/dump_schemas.sh"
 . "${root_dir}/scripts/dump_routines.sh"
+. "${root_dir}/scripts/dump_events.sh"
 
 . "${root_dir}/scripts/close_tunnel.sh"
 
