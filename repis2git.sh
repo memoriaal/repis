@@ -14,5 +14,13 @@ git pull
 
 # commit changes
 git add .
-git commit -m "Update schemas, functions and procedures"
+
+# set commit message if provided as argument
+if [ $# -eq 1 ]; then
+    commit_message=$1
+else
+    commit_message="Update schemas, functions and procedures"
+fi
+git commit -m "$commit_message"
+
 git push
