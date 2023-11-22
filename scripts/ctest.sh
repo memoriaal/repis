@@ -11,6 +11,10 @@ fi
 if [ ! -d "$script_dir/../dumps/schemas" ]; then
   mkdir -p $script_dir/../dumps/schemas
 fi
+if [ ! -d "$script_dir/../dumps/events" ]; then
+  mkdir -p $script_dir/../dumps/events
+fi
+
 
 if nc -z localhost $SSH_LOCAL_PORT; then
     now=`mysql --host=127.0.0.1 --port=3306 -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" pub<<EOFMYSQL

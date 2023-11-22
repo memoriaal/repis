@@ -9,9 +9,11 @@ source "$script_dir/../.env"
 
 # Loop through all the databases
 if nc -z localhost $SSH_LOCAL_PORT; then
-  echo "Dumping events"
-  mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --events --no-data --no-create-info | grep -v "/*!" > dumps/events.sql
-  echo "Events dumped"
+  for db in ${MYSQL_DATABASES[@]}; do
+    echo "Dumping events for ${db}..."
+    mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --events --no-data --no-create-info ${db} | grep -v "/*!" > dumps/events/${db}.sql
+    echo "Events for ${db} dumped."
+  done
 else
   echo "No tunnel. Or is it?"
   ps aux | grep "ssh -f -N -T -M -L 3306" | grep -v grep
