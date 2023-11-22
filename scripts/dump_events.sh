@@ -11,7 +11,7 @@ source "$script_dir/../.env"
 if nc -z localhost $SSH_LOCAL_PORT; then
   for db in ${MYSQL_DATABASES[@]}; do
     echo "Dumping events for ${db}..."
-    mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --events --no-data --no-create-info ${db} > dumps/events/${db}.sql
+    mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --events --no-data --no-create-info ${db} | head -n -2 > dumps/events/${db}.sql
     echo "Events for ${db} dumped."
   done
 else
