@@ -271,16 +271,16 @@ END ;;
 DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`queue`@`localhost` FUNCTION `func_next_id`(
-      _name VARCHAR(20)
-  ) RETURNS int(10) unsigned
+	`in_name` VARCHAR(20)
+) RETURNS int(10) unsigned
 func_label:BEGIN
 
     DECLARE _ret_val INT(10) UNSIGNED;
 
-    INSERT INTO repis.counter (id, value) VALUES (_name, 1)
+    INSERT INTO repis.counter (id, value) VALUES (in_name, 1)
     ON DUPLICATE KEY UPDATE value = value + 1;
 
-    SELECT value INTO _ret_val FROM repis.counter WHERE id = _name;
+    SELECT value INTO _ret_val FROM repis.counter WHERE id = in_name;
 
     RETURN _ret_val;
   END ;;
