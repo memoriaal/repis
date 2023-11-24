@@ -837,31 +837,6 @@ BEGIN
 END ;;
 DELIMITER ;
 DELIMITER ;;
-CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `kirje_AA`(
-	`in_kirjekood` CHAR(10)
-) RETURNS varchar(2000) CHARSET utf8 COLLATE utf8_estonian_ci
-func_label:BEGIN
-
-    SELECT concat_ws('. ',
-      concat_ws(', ', nullif(aa.perenimi, ''), nullif(aa.eesnimi, '')),
-      nullif(
-        concat('Sünd: ', concat_ws(', ', nullif(aa.sünd, ''), nullif(aa.sünnikoht, ''))),
-        'Sünd: , '
-      ),
-      nullif(
-        concat('Surm: ', concat_ws(', ', nullif(aa.surm, ''), nullif(aa.surmakoht, ''))),
-        'Surm: , '
-      ),
-      aa.elulugu
-    ) INTO @_kirje
-    from import.album_academicum aa
-    WHERE aa.kirjekood = in_kirjekood COLLATE UTF8_ESTONIAN_CI;
-
-    RETURN @_kirje;
-
-  END ;;
-DELIMITER ;
-DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `kirje_std_persoon`(
 	`_perenimi` VARCHAR(50),
 	`_eesnimi` VARCHAR(50),
