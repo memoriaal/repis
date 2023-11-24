@@ -1571,6 +1571,7 @@ CREATE TABLE `pereregister` (
   KEY `ema nimed` (`ema_eesnimi`,`isik_perenimi`,`ema_synniaasta`),
   KEY `isa nimed` (`isa_eesnimi`,`isik_perenimi`,`isa_synniaasta`),
   KEY `idix` (`id`),
+  KEY `surm` (`surm`),
   CONSTRAINT `ema` FOREIGN KEY (`ema_kirjekood`) REFERENCES `pereregister` (`isikukood`),
   CONSTRAINT `fk_pr_persoon` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`),
   CONSTRAINT `isa` FOREIGN KEY (`isa_kirjekood`) REFERENCES `pereregister` (`isikukood`)
@@ -2147,26 +2148,3 @@ CREATE TABLE `wp_msyne_koonduslaager` (
 --
 -- Current Database: `import`
 --
-
-USE `import`;
-
---
--- Final view structure for view `el_kart_view`
---
-
-
---
--- Final view structure for view `eraf_nimistu_v`
---
-
-
---
--- Final view structure for view `erisurmaaktid_kivita`
---
-
-
---
--- Final view structure for view `krossi_metsavennad_X_repis`
---
-
-
