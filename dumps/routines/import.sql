@@ -48,7 +48,7 @@ BEGIN
 END ;;
 DELIMITER ;
 DELIMITER ;;
-CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `import.kirje_AA`(
+CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `kirje_AA`(
 	`in_kirjekood` CHAR(10)
 ) RETURNS varchar(2000) CHARSET utf8 COLLATE utf8_estonian_ci
 func_label:BEGIN
@@ -63,38 +63,6 @@ func_label:BEGIN
         concat('Surm: ', concat_ws(', ', nullif(aa.surm, ''), nullif(aa.surmakoht, ''))),
         'Surm: , '
       ),
-      aa.elulugu
-    ) INTO @_kirje
-    from import.album_academicum aa
-    WHERE aa.kirjekood = in_kirjekood COLLATE UTF8_ESTONIAN_CI;
-
-    RETURN @_kirje;
-
-  END ;;
-DELIMITER ;
-DELIMITER ;;
-CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `kirje_AA`(
-	`in_kirjekood` CHAR(10)
-) RETURNS varchar(2000) CHARSET utf8 COLLATE utf8_estonian_ci
-func_label:BEGIN
-
-    SELECT concat_ws('. ',
-      concat_ws(', ',
-          if(aa.perenimi='',NULL,aa.perenimi),
-          if(aa.eesnimi='',NULL,aa.eesnimi)
-      ),
-      if(aa.sünd='' AND aa.sünnikoht='', NULL,
-        concat_ws(', ',
-          if(aa.sünd='',NULL,concat('Sünd: ', aa.sünd)),
-          if(aa.sünnikoht='',NULL,repis.func_rr_aadress(aa.sünnikoht))
-        )
-      ),
-      if(aa.surm='' AND aa.surmakoht='', NULL,
-        concat_ws(', ',
-          if(aa.surm='',NULL,concat('Surm: ', aa.surm)),
-          if(aa.surmakoht='',NULL,repis.func_rr_aadress(aa.surmakoht))
-        )
-      ), 
       aa.elulugu
     ) INTO @_kirje
     from import.album_academicum aa
