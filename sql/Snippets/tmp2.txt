@@ -1,0 +1,347 @@
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE kirjekood IN ('0000064046')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE kirjekood IN ('0000068845')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT persoon FROM repis.kirjed
+WHERE kirjekood = '0000068845';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000157637';
+/* Affected rows: 0  Found rows: 11  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT * FROM repis.kirjed WHERE kirjekood = '0000068845';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000068845';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT * FROM repis.kirjed WHERE kirjekood = '0000068845';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.016 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000068845';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+UPDATE `repis`.`kirjed` SET `persoon`='0000157637' WHERE  `kirjekood`='RK-0029106';
+SELECT `persoon`, `kirjekood`, `Kirje`, `Perenimi`, `Eesnimi`, `Isanimi`, `Emanimi`, `Sünd`, `Sünnikoht`, `Surm`, `Surmakoht`, `Lipikud`, `Sildid`, `RaamatuPere`, `LeidPere`, `Sugu`, `Rahvus`, `Välisviide`, `Kommentaar`, `Allikas`, `Nimekiri`, `Puudulik`, `EkslikKanne`, `Peatatud`, `EiArvesta`, `kustuta`, `legend`, `KirjePersoon`, `KirjeJutt`, `Elukoht`, `Surma põhjus`, `Matmiskoht`, `Matmisaeg`, `pub_emem`, `pub_kivi`, `pub_wwiiref`, `pub_evo`, `pub_mv`, `pub_isPerson`, `created_at`, `created_by`, `updated_at`, `updated_by` FROM `repis`.`kirjed` WHERE  `kirjekood`='RK-0029106';
+SELECT * FROM repis.kirjed WHERE persoon = '0000079650';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.016 sec. */
+SELECT * FROM repis.kirjed WHERE kirjekood = '0000079650';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.015 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000079650';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+UPDATE `repis`.`kirjed` SET `persoon`='0000111904' WHERE  `kirjekood`='VS-4620139';
+SELECT `persoon`, `kirjekood`, `Kirje`, `Perenimi`, `Eesnimi`, `Isanimi`, `Emanimi`, `Sünd`, `Sünnikoht`, `Surm`, `Surmakoht`, `Lipikud`, `Sildid`, `RaamatuPere`, `LeidPere`, `Sugu`, `Rahvus`, `Välisviide`, `Kommentaar`, `Allikas`, `Nimekiri`, `Puudulik`, `EkslikKanne`, `Peatatud`, `EiArvesta`, `kustuta`, `legend`, `KirjePersoon`, `KirjeJutt`, `Elukoht`, `Surma põhjus`, `Matmiskoht`, `Matmisaeg`, `pub_emem`, `pub_kivi`, `pub_wwiiref`, `pub_evo`, `pub_mv`, `pub_isPerson`, `created_at`, `created_by`, `updated_at`, `updated_by` FROM `repis`.`kirjed` WHERE  `kirjekood`='VS-4620139';
+SELECT * FROM repis.kirjed WHERE kirjekood = '0000142878';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.016 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000142878';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+UPDATE `repis`.`kirjed` SET `persoon`='0000081237' WHERE  `kirjekood`='VS-4710016';
+SELECT `persoon`, `kirjekood`, `Kirje`, `Perenimi`, `Eesnimi`, `Isanimi`, `Emanimi`, `Sünd`, `Sünnikoht`, `Surm`, `Surmakoht`, `Lipikud`, `Sildid`, `RaamatuPere`, `LeidPere`, `Sugu`, `Rahvus`, `Välisviide`, `Kommentaar`, `Allikas`, `Nimekiri`, `Puudulik`, `EkslikKanne`, `Peatatud`, `EiArvesta`, `kustuta`, `legend`, `KirjePersoon`, `KirjeJutt`, `Elukoht`, `Surma põhjus`, `Matmiskoht`, `Matmisaeg`, `pub_emem`, `pub_kivi`, `pub_wwiiref`, `pub_evo`, `pub_mv`, `pub_isPerson`, `created_at`, `created_by`, `updated_at`, `updated_by` FROM `repis`.`kirjed` WHERE  `kirjekood`='VS-4710016';
+SELECT * FROM repis.kirjed WHERE kirjekood = '0000195235';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000195235';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+UPDATE `repis`.`kirjed` SET `persoon`='0000077879' WHERE  `kirjekood`='VS-4750087';
+SELECT `persoon`, `kirjekood`, `Kirje`, `Perenimi`, `Eesnimi`, `Isanimi`, `Emanimi`, `Sünd`, `Sünnikoht`, `Surm`, `Surmakoht`, `Lipikud`, `Sildid`, `RaamatuPere`, `LeidPere`, `Sugu`, `Rahvus`, `Välisviide`, `Kommentaar`, `Allikas`, `Nimekiri`, `Puudulik`, `EkslikKanne`, `Peatatud`, `EiArvesta`, `kustuta`, `legend`, `KirjePersoon`, `KirjeJutt`, `Elukoht`, `Surma põhjus`, `Matmiskoht`, `Matmisaeg`, `pub_emem`, `pub_kivi`, `pub_wwiiref`, `pub_evo`, `pub_mv`, `pub_isPerson`, `created_at`, `created_by`, `updated_at`, `updated_by` FROM `repis`.`kirjed` WHERE  `kirjekood`='VS-4750087';
+SELECT * FROM repis.kirjed WHERE kirjekood = '0000212412';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.016 sec. */
+SELECT * FROM repis.kirjed WHERE persoon = '0000212412';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+UPDATE `repis`.`kirjed` SET `persoon`='0000073746' WHERE  `kirjekood`='VS-4500494';
+SELECT `persoon`, `kirjekood`, `Kirje`, `Perenimi`, `Eesnimi`, `Isanimi`, `Emanimi`, `Sünd`, `Sünnikoht`, `Surm`, `Surmakoht`, `Lipikud`, `Sildid`, `RaamatuPere`, `LeidPere`, `Sugu`, `Rahvus`, `Välisviide`, `Kommentaar`, `Allikas`, `Nimekiri`, `Puudulik`, `EkslikKanne`, `Peatatud`, `EiArvesta`, `kustuta`, `legend`, `KirjePersoon`, `KirjeJutt`, `Elukoht`, `Surma põhjus`, `Matmiskoht`, `Matmisaeg`, `pub_emem`, `pub_kivi`, `pub_wwiiref`, `pub_evo`, `pub_mv`, `pub_isPerson`, `created_at`, `created_by`, `updated_at`, `updated_by` FROM `repis`.`kirjed` WHERE  `kirjekood`='VS-4500494';
+SHOW CREATE PROCEDURE `pub`.`2pub`;SHOW CREATE TABLE `pub`.`nimekirjad`;SHOW CREATE PROCEDURE `pub`.`proc_pereseosed_nimekirja`;SHOW CREATE PROCEDURE `pub`.`proc_sugulased_nimekirja`;SHOW CREATE PROCEDURE `pub`.`repub`;SHOW CREATE PROCEDURE `pub`.`repub_all`;
+CALL pub.2pub('0000073746');
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT *
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.062 sec. (+ 0.188 sec. network) */
+SELECT k0.persoon
+     , ifnull(MAX(k0.pub_emem),0) AS pub_emem
+     , ifnull(MAX(k0.pub_kivi),0) AS pub_kivi
+     , IF(mk.persoon IS NULL, '', mk.tahvel) AS kivitahvel
+FROM repis.kirjed k0
+LEFT JOIN repis.kirjed kmk ON kmk.persoon = k0.persoon AND kmk.allikas = 'KIVI'
+LEFT JOIN import.memoriaal_kivitahvlid mk ON mk.kirjekood = kmk.kirjekood
+WHERE k0.persoon IS NOT NULL
+  AND mk.persoon IS NULL
+GROUP BY k0.persoon
+HAVING pub_kivi = 1
+;
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 9.969 sec. */
+SELECT persoon
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.125 sec. */
+CREATE OR REPLACE TABLE aruanded.persoonikoodid as
+SELECT persoon
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+/* Affected rows: 200  Found rows: 0  Warnings: 0  Duration for 1 query: 0.203 sec. */
+USE `aruanded`;
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='aruanded' AND TABLE_NAME='persoonikirjed' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `persoonikirjed` FROM `aruanded`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='aruanded'   AND TABLE_NAME='persoonikirjed'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='aruanded'   AND TABLE_NAME='persoonikirjed'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT CURRENT_USER();
+SHOW CREATE VIEW `aruanded`.`persoonikirjed`;
+SELECT CAST(LOAD_FILE(CONCAT(IFNULL(@@GLOBAL.datadir, CONCAT(@@GLOBAL.basedir, 'data/')), 'aruanded/persoonikirjed.frm')) AS CHAR CHARACTER SET utf8);
+SELECT * FROM `aruanded`.`persoonikirjed` LIMIT 1000;
+SELECT * FROM `aruanded`.`persoonikirjed` LIMIT 1000;
+SHOW CREATE TABLE `aruanded`.`allkirjastatud_nimekiri_2018_11_16`;SHOW CREATE TABLE `aruanded`.`emanimed`;SHOW CREATE TABLE `aruanded`.`kirjekoodid`;SHOW CREATE TABLE `aruanded`.`kyyditatud_sakslased`;SHOW CREATE TABLE `aruanded`.`lisatahvlid_2020`;SHOW CREATE TABLE `aruanded`.`memo_ru_perenimed`;SHOW CREATE TABLE `aruanded`.`persoonikoodid`;SHOW CREATE TABLE `aruanded`.`persoonikoodid_2021_01_06`;SHOW CREATE TABLE `aruanded`.`persoonikoodid_copy`;SHOW CREATE TABLE `aruanded`.`statistika`;
+SELECT * FROM aruanded.persoonikirjed
+;
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.015 sec. */
+SELECT * FROM aruanded.persoonikirjed
+ORDER BY eesnimi, perenimi
+;
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.015 sec. (+ 0.016 sec. network) */
+CREATE OR REPLACE TABLE aruanded.persoonikoodid as
+SELECT persoon
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+-- 
+SELECT * FROM aruanded.persoonikirjed
+ORDER BY eesnimi, perenimi
+;
+/* Affected rows: 200  Found rows: 200  Warnings: 0  Duration for 2 queries: 0.266 sec. (+ 0.015 sec. network) */
+CREATE OR REPLACE TABLE aruanded.persoonikoodid as
+SELECT persoon
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+-- 
+SELECT * FROM aruanded.persoonikirjed
+ORDER BY perenimi, eesnimi
+;
+/* Affected rows: 200  Found rows: 200  Warnings: 0  Duration for 2 queries: 0.219 sec. (+ 0.015 sec. network) */
+USE `repis`;
+SELECT CURRENT_USER();
+SHOW CREATE FUNCTION `repis`.`func_kivitekst`;
+USE `pub`;
+SHOW CREATE TABLE `pub`.`nimekirjad`;
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` WHERE persoon IN ('0000064046','')
+ ORDER BY `kirje` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` WHERE persoon IN ('0000138874','')
+ ORDER BY `kirje` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT `persoon`, `kirje`, `evokirje`, `perenimi`, `eesnimi`, `isanimi`, `emanimi`, `sünd`, `surm`, `sünnikoht`, `surmakoht`, `isPerson`, `kivi`, `emem`, `evo`, `wwiiref`, `mv`, `kirjed`, `pereseosed`, `tahvlikirje`, `updated` FROM `pub`.`nimekirjad` WHERE  `persoon`='0000138874';
+SELECT persoon
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.141 sec. */
+SELECT CONCAT('CALL pub.2pub(', persoon, ');')
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.156 sec. */
+-- CONCAT('CALL pub.2pub(', persoon, ');')
+CALL pub.2pub(0000008383);
+/* SQL Error (1452): Cannot add or update a child row: a foreign key constraint fails (`pub`.`nimekirjad`, CONSTRAINT `FK_nimekirjad_repis_kirjed` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`) ON DELETE CASCADE ON UPDATE CASCADE) */
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 0 of 200 queries: 0.000 sec. */
+-- CONCAT('CALL pub.2pub(', persoon, ');')
+CALL pub.2pub(0000008383);
+/* SQL Error (1452): Cannot add or update a child row: a foreign key constraint fails (`pub`.`nimekirjad`, CONSTRAINT `FK_nimekirjad_repis_kirjed` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`) ON DELETE CASCADE ON UPDATE CASCADE) */
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 0 of 1 query: 0.000 sec. */
+SELECT CONCAT('CALL pub.2pub("', persoon, '");')
+FROM pub.nimekirjad nkx
+WHERE JSON_EXTRACT(nkx.tahvlikirje, "$.tahvel") = 'X';
+/* Affected rows: 0  Found rows: 200  Warnings: 0  Duration for 1 query: 0.141 sec. */
+-- CONCAT('CALL pub.2pub("', persoon, '");')
+CALL pub.2pub("0000008383");
+CALL pub.2pub("0000064139");
+CALL pub.2pub("0000064140");
+CALL pub.2pub("0000064151");
+CALL pub.2pub("0000082980");
+CALL pub.2pub("0000112204");
+CALL pub.2pub("0000112407");
+CALL pub.2pub("0000112927");
+CALL pub.2pub("0000113075");
+CALL pub.2pub("0000113280");
+CALL pub.2pub("0000113389");
+CALL pub.2pub("0000113577");
+CALL pub.2pub("0000113795");
+CALL pub.2pub("0000113820");
+CALL pub.2pub("0000114005");
+CALL pub.2pub("0000114269");
+CALL pub.2pub("0000114519");
+CALL pub.2pub("0000114521");
+CALL pub.2pub("0000114849");
+CALL pub.2pub("0000114934");
+CALL pub.2pub("0000115040");
+CALL pub.2pub("0000115373");
+CALL pub.2pub("0000115716");
+CALL pub.2pub("0000115728");
+CALL pub.2pub("0000115837");
+CALL pub.2pub("0000115863");
+CALL pub.2pub("0000116112");
+CALL pub.2pub("0000116551");
+CALL pub.2pub("0000116910");
+CALL pub.2pub("0000117045");
+CALL pub.2pub("0000117133");
+CALL pub.2pub("0000117281");
+CALL pub.2pub("0000117527");
+CALL pub.2pub("0000117588");
+CALL pub.2pub("0000117589");
+CALL pub.2pub("0000117637");
+CALL pub.2pub("0000117650");
+CALL pub.2pub("0000117655");
+CALL pub.2pub("0000117806");
+CALL pub.2pub("0000118011");
+CALL pub.2pub("0000118088");
+CALL pub.2pub("0000118120");
+CALL pub.2pub("0000118227");
+CALL pub.2pub("0000118368");
+CALL pub.2pub("0000118519");
+CALL pub.2pub("0000118743");
+CALL pub.2pub("0000119115");
+CALL pub.2pub("0000119219");
+CALL pub.2pub("0000119481");
+CALL pub.2pub("0000119488");
+CALL pub.2pub("0000120541");
+CALL pub.2pub("0000120627");
+CALL pub.2pub("0000121577");
+CALL pub.2pub("0000122219");
+CALL pub.2pub("0000122284");
+CALL pub.2pub("0000122495");
+CALL pub.2pub("0000122675");
+CALL pub.2pub("0000122724");
+CALL pub.2pub("0000128225");
+CALL pub.2pub("0000130725");
+CALL pub.2pub("0000132541");
+CALL pub.2pub("0000135348");
+CALL pub.2pub("0000137869");
+CALL pub.2pub("0000137897");
+CALL pub.2pub("0000137898");
+CALL pub.2pub("0000138874");
+CALL pub.2pub("0000140377");
+CALL pub.2pub("0000141100");
+CALL pub.2pub("0000141575");
+CALL pub.2pub("0000141643");
+CALL pub.2pub("0000141763");
+CALL pub.2pub("0000142108");
+CALL pub.2pub("0000142206");
+CALL pub.2pub("0000142831");
+CALL pub.2pub("0000143402");
+CALL pub.2pub("0000143655");
+CALL pub.2pub("0000143708");
+CALL pub.2pub("0000144737");
+CALL pub.2pub("0000154158");
+CALL pub.2pub("0000154196");
+CALL pub.2pub("0000154287");
+CALL pub.2pub("0000155490");
+CALL pub.2pub("0000156231");
+CALL pub.2pub("0000156443");
+CALL pub.2pub("0000156673");
+CALL pub.2pub("0000156746");
+CALL pub.2pub("0000156841");
+CALL pub.2pub("0000156985");
+CALL pub.2pub("0000158096");
+CALL pub.2pub("0000158428");
+CALL pub.2pub("0000158517");
+CALL pub.2pub("0000159795");
+CALL pub.2pub("0000162626");
+CALL pub.2pub("0000163384");
+CALL pub.2pub("0000163515");
+CALL pub.2pub("0000163573");
+CALL pub.2pub("0000163574");
+CALL pub.2pub("0000163773");
+CALL pub.2pub("0000164223");
+CALL pub.2pub("0000164482");
+CALL pub.2pub("0000164672");
+CALL pub.2pub("0000164711");
+CALL pub.2pub("0000164776");
+CALL pub.2pub("0000164819");
+CALL pub.2pub("0000164925");
+CALL pub.2pub("0000165151");
+CALL pub.2pub("0000165165");
+CALL pub.2pub("0000165427");
+CALL pub.2pub("0000166381");
+CALL pub.2pub("0000167234");
+CALL pub.2pub("0000167377");
+CALL pub.2pub("0000167475");
+CALL pub.2pub("0000167869");
+CALL pub.2pub("0000169940");
+CALL pub.2pub("0000170734");
+CALL pub.2pub("0000171534");
+CALL pub.2pub("0000171736");
+CALL pub.2pub("0000172084");
+CALL pub.2pub("0000172554");
+CALL pub.2pub("0000172952");
+CALL pub.2pub("0000173590");
+CALL pub.2pub("0000173874");
+CALL pub.2pub("0000174323");
+CALL pub.2pub("0000175116");
+CALL pub.2pub("0000176346");
+CALL pub.2pub("0000176908");
+CALL pub.2pub("0000176943");
+CALL pub.2pub("0000177954");
+CALL pub.2pub("0000178842");
+CALL pub.2pub("0000179169");
+CALL pub.2pub("0000179421");
+CALL pub.2pub("0000180860");
+CALL pub.2pub("0000180969");
+CALL pub.2pub("0000181235");
+CALL pub.2pub("0000181709");
+CALL pub.2pub("0000182075");
+CALL pub.2pub("0000182617");
+CALL pub.2pub("0000183780");
+CALL pub.2pub("0000184835");
+CALL pub.2pub("0000184870");
+CALL pub.2pub("0000186156");
+CALL pub.2pub("0000186263");
+CALL pub.2pub("0000186534");
+CALL pub.2pub("0000187475");
+CALL pub.2pub("0000188842");
+CALL pub.2pub("0000188851");
+CALL pub.2pub("0000188889");
+CALL pub.2pub("0000189100");
+CALL pub.2pub("0000189871");
+CALL pub.2pub("0000190419");
+CALL pub.2pub("0000190511");
+CALL pub.2pub("0000191487");
+CALL pub.2pub("0000191599");
+CALL pub.2pub("0000192250");
+CALL pub.2pub("0000192396");
+CALL pub.2pub("0000192567");
+CALL pub.2pub("0000192634");
+CALL pub.2pub("0000192842");
+CALL pub.2pub("0000192926");
+CALL pub.2pub("0000193517");
+CALL pub.2pub("0000193953");
+CALL pub.2pub("0000194093");
+CALL pub.2pub("0000195283");
+CALL pub.2pub("0000195304");
+CALL pub.2pub("0000195569");
+CALL pub.2pub("0000198272");
+CALL pub.2pub("0000205104");
+CALL pub.2pub("0000214131");
+CALL pub.2pub("0000214260");
+CALL pub.2pub("0000214367");
+CALL pub.2pub("0000214553");
+CALL pub.2pub("0000214565");
+CALL pub.2pub("0000214597");
+CALL pub.2pub("0000214881");
+CALL pub.2pub("0000214889");
+CALL pub.2pub("0000215014");
+CALL pub.2pub("0000215071");
+CALL pub.2pub("0000215113");
+CALL pub.2pub("0000218262");
+CALL pub.2pub("0000218268");
+CALL pub.2pub("0000218274");
+CALL pub.2pub("0000218281");
+CALL pub.2pub("0000218282");
+CALL pub.2pub("0000218283");
+CALL pub.2pub("0000218284");
+CALL pub.2pub("0000218285");
+CALL pub.2pub("0000218286");
+CALL pub.2pub("0000218287");
+CALL pub.2pub("0000218288");
+CALL pub.2pub("0000218289");
+CALL pub.2pub("0000218291");
+CALL pub.2pub("0000380302");
+CALL pub.2pub("0000380417");
+CALL pub.2pub("0000380465");
+CALL pub.2pub("0000380482");
+CALL pub.2pub("0000380483");
+CALL pub.2pub("0000380484");
+CALL pub.2pub("0000380485");
+CALL pub.2pub("0000380506");
+CALL pub.2pub("0000380513");
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 200 queries: 1.156 sec. */

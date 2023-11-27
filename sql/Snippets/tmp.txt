@@ -1,0 +1,583 @@
+/* Delimiter changed to ; */
+/* Writing to session log file now: C:\Users\michelek\AppData\Roaming\HeidiSQL\Sessionlogs\000058.log */
+/* Connecting to 127.0.0.1 via MariaDB or MySQL (SSH tunnel), username michelek, using password: Yes ... */
+/* Port #3307 in use. Checking if #3308 is available... */
+/* Attempt to create SSH process, waiting 4s for response ... */
+/* plink.exe -ssh michelek@dev.memoriaal.ee -P 22 -i "C:\Users\michelek\ecdsa.ppk" -N -L 3308:127.0.0.1:3306 */
+/* SSH: Using username "michelek".
+ */
+SELECT CONNECTION_ID();
+SHOW VARIABLES;
+/* Characterset: utf8mb4 */
+SHOW /*!50002 GLOBAL */ STATUS;
+SELECT NOW();
+/* Connected. Thread-ID: 169741 */
+/* Reading function definitions from C:\Program Files\HeidiSQL\functions-mariadb.ini */
+SHOW TABLES FROM `information_schema`;
+SHOW DATABASES;
+SHOW OPEN TABLES FROM aruanded WHERE `in_use`!=0;
+USE `aruanded`;
+/* Entering session "repis" */
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='aruanded';
+SHOW TABLE STATUS FROM `aruanded`;
+SHOW FUNCTION STATUS WHERE `Db`='aruanded';
+SHOW PROCEDURE STATUS WHERE `Db`='aruanded';
+SHOW TRIGGERS FROM `aruanded`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='aruanded';
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2022-10-31_12-26-07-206.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-01-16_13-47-26-141.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-01-20_11-30-28-541.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-01-23_14-36-25-945.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-02-02_14-08-37-804.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-02-10_16-05-53-801.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-02-15_12-30-59-030.sql loaded in process #13336 */
+/* C:\Users\michelek\AppData\Roaming\HeidiSQL\Backups\query-tab-2023-02-15_14-09-23-730.sql loaded in process #13336 */
+/* Scaling controls to screen DPI: 100% */
+USE `repis`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='repis';
+SHOW TABLE STATUS FROM `repis`;
+SHOW FUNCTION STATUS WHERE `Db`='repis';
+SHOW PROCEDURE STATUS WHERE `Db`='repis';
+SHOW TRIGGERS FROM `repis`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='repis';
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='repis' AND TABLE_NAME='kirjed' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `kirjed` FROM `repis`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='repis'   AND TABLE_NAME='kirjed'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='repis'   AND TABLE_NAME='kirjed'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW ENGINES;
+SHOW COLLATION;
+SHOW CREATE TABLE `repis`.`kirjed`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='repis' AND TABLE_NAME='kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE kirjekood regexp ('VS-E')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000137897')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000137898')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000128225')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000177954')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000079456')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT *
+FROM repis.kirjed pk
+WHERE pk.Sildid REGEXP 'Pime kivi'
+LIMIT 10;
+/* Affected rows: 0  Found rows: 10  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT *
+FROM repis.kirjed pk
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+LIMIT 10;
+/* Affected rows: 0  Found rows: 10  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+LIMIT 1000;
+/* Affected rows: 0  Found rows: 1,000  Warnings: 0  Duration for 1 query: 0.000 sec. (+ 0.031 sec. network) */
+SELECT k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+LIMIT 10000;
+/* Affected rows: 0  Found rows: 9,677  Warnings: 0  Duration for 1 query: 0.000 sec. (+ 0.500 sec. network) */
+SELECT DISTINCT persoon
+FROM repis.kirjed pk
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+;
+/* Affected rows: 0  Found rows: 137  Warnings: 0  Duration for 1 query: 1.219 sec. */
+SELECT k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+;
+/* Affected rows: 0  Found rows: 9,677  Warnings: 0  Duration for 1 query: 0.000 sec. (+ 0.453 sec. network) */
+SELECT k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+;
+/* Affected rows: 0  Found rows: 9,029  Warnings: 0  Duration for 1 query: 0.015 sec. (+ 0.485 sec. network) */
+SELECT DISTINCT persoon
+FROM repis.kirjed pk
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+;
+/* Affected rows: 0  Found rows: 136  Warnings: 0  Duration for 1 query: 1.234 sec. */
+SELECT k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+;
+/* Affected rows: 0  Found rows: 9,029  Warnings: 0  Duration for 1 query: 0.000 sec. (+ 0.468 sec. network) */
+SELECT kk.kirjekood, k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+;
+/* Affected rows: 0  Found rows: 9,029  Warnings: 0  Duration for 1 query: 0.016 sec. (+ 0.625 sec. network) */
+SELECT kk.kirjekood, k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 100  Warnings: 0  Duration for 1 query: 0.297 sec. (+ 0.234 sec. network) */
+SELECT k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 100  Warnings: 0  Duration for 1 query: 0.344 sec. (+ 0.234 sec. network) */
+SELECT distinct k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 32  Warnings: 0  Duration for 1 query: 0.578 sec. */
+SELECT DISTINCT persoon
+FROM repis.kirjed pk
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+;
+SELECT distinct k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 161  Warnings: 0  Duration for 2 queries: 1.937 sec. */
+SELECT distinct k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 27  Warnings: 0  Duration for 1 query: 0.578 sec. */
+UPDATE `repis`.`kirjed` SET `pub_kivi`=b'0' WHERE  `kirjekood`='SMAT-02122';
+SELECT `persoon`, `kirjekood`, `Kirje`, `Perenimi`, `Eesnimi`, `Isanimi`, `Emanimi`, `Sünd`, `Sünnikoht`, `Surm`, `Surmakoht`, `Lipikud`, `Sildid`, `RaamatuPere`, `LeidPere`, `Sugu`, `Rahvus`, `Välisviide`, `Kommentaar`, `Allikas`, `Nimekiri`, `Puudulik`, `EkslikKanne`, `Peatatud`, `EiArvesta`, `kustuta`, `legend`, `KirjePersoon`, `KirjeJutt`, `Elukoht`, `Surma põhjus`, `Matmiskoht`, `Matmisaeg`, `pub_emem`, `pub_kivi`, `pub_wwiiref`, `pub_evo`, `pub_mv`, `pub_isPerson`, `created_at`, `created_by`, `updated_at`, `updated_by` FROM `repis`.`kirjed` WHERE  `kirjekood`='SMAT-02122';
+SELECT DISTINCT persoon
+FROM repis.kirjed pk
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+;
+SELECT distinct k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 155  Warnings: 0  Duration for 2 queries: 1.813 sec. */
+SELECT distinct k1.*
+FROM repis.kirjed pk
+LEFT JOIN repis.kirjed k1 ON k1.persoon = pk.persoon
+LEFT JOIN repis.kirjed kk ON kk.persoon = pk.persoon AND kk.Allikas = 'KIVI'
+WHERE pk.Sildid REGEXP 'Pime kivi'
+  AND pk.pub_kivi
+  AND pk.persoon > 0
+  AND kk.kirjekood IS null
+;
+/* Affected rows: 0  Found rows: 29  Warnings: 0  Duration for 1 query: 0.547 sec. */
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='pub';
+SHOW TABLE STATUS FROM `pub`;
+SHOW FUNCTION STATUS WHERE `Db`='pub';
+SHOW PROCEDURE STATUS WHERE `Db`='pub';
+SHOW TRIGGERS FROM `pub`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='pub';
+USE `pub`;
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='pub' AND TABLE_NAME='nimekirjad' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `nimekirjad` FROM `pub`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='pub'   AND TABLE_NAME='nimekirjad'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='pub'   AND TABLE_NAME='nimekirjad'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW CREATE TABLE `pub`.`nimekirjad`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='pub' AND TABLE_NAME='nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` WHERE persoon IN ('0000214598','')
+ ORDER BY `kirje` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` WHERE persoon IN ('0000064151','')
+ ORDER BY `kirje` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT `persoon`, `kirje`, `evokirje`, `perenimi`, `eesnimi`, `isanimi`, `emanimi`, `sünd`, `surm`, `sünnikoht`, `surmakoht`, `isPerson`, `kivi`, `emem`, `evo`, `wwiiref`, `mv`, `kirjed`, `pereseosed`, `tahvlikirje`, `updated` FROM `pub`.`nimekirjad` WHERE  `persoon`='0000064151';
+/* #1634496361: Access violation at address 00000056BC200000 in module 'heidisql.exe'. Execution of address 00000056BC200000 Message CharCode:27 Msg:256 */
+SELECT JSON_OBJECT(
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida) INTO _ret
+    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = '0000064151';
+/* SQL Error (1327): Undeclared variable: _ret */
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 0 of 1 query: 0.000 sec. */
+SELECT JSON_OBJECT(
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida)
+    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = '0000064151';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT 
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida
+	    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = '0000064151';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.016 sec. */
+SHOW CREATE PROCEDURE `repis`.`aggr_kirjed`;SHOW CREATE PROCEDURE `repis`.`aggr_lipikud`;SHOW CREATE PROCEDURE `repis`.`aggr_persoonid`;SHOW CREATE PROCEDURE `repis`.`aggr_sildid`;SHOW CREATE TABLE `repis`.`allikad`;SHOW CREATE TABLE `repis`.`asukohad`;SHOW CREATE TABLE `repis`.`a_kirjed`;SHOW CREATE TABLE `repis`.`a_lipikud`;SHOW CREATE TABLE `repis`.`a_sildid`;SHOW CREATE EVENT `repis`.`backup`;SHOW CREATE PROCEDURE `repis`.`backup`;SHOW CREATE PROCEDURE `repis`.`backup_table`;SHOW CREATE TABLE `repis`.`counter`;SHOW CREATE TABLE `repis`.`c_lipikud`;SHOW CREATE TABLE `repis`.`c_seoseliigid`;SHOW CREATE TABLE `repis`.`c_sildid`;SHOW CREATE PROCEDURE `repis`.`debug_msg`;SHOW CREATE TABLE `repis`.`desktop`;SHOW CREATE TRIGGER `repis`.`desktop_BI`;SHOW CREATE TRIGGER `repis`.`desktop_BU`;SHOW CREATE FUNCTION `repis`.`desktop_next_id`;SHOW CREATE FUNCTION `repis`.`desktop_person_text`;SHOW CREATE TABLE `repis`.`desk_lipikud`;SHOW CREATE TABLE `repis`.`desk_sildid`;SHOW CREATE FUNCTION `repis`.`emadisad_next_id`;SHOW CREATE TABLE `repis`.`emaisalaud`;SHOW CREATE TRIGGER `repis`.`emaisalaud_AI`;SHOW CREATE TRIGGER `repis`.`emaisalaud_AU`;SHOW CREATE TRIGGER `repis`.`emaisalaud_BI`;SHOW CREATE TRIGGER `repis`.`emaisalaud_BU`;SHOW CREATE TABLE `repis`.`episoodid_0`;SHOW CREATE TABLE `repis`.`failid`;SHOW CREATE PROCEDURE `repis`.`fix_dates`;SHOW CREATE PROCEDURE `repis`.`flush_vorm_kirjed`;SHOW CREATE TABLE `repis`.`fondid`;SHOW CREATE FUNCTION `repis`.`func_aastad`;SHOW CREATE FUNCTION `repis`.`func_capital_case`;SHOW CREATE FUNCTION `repis`.`func_ISO2ppkkaa`;SHOW CREATE FUNCTION `repis`.`func_kirje2persoon`;SHOW CREATE FUNCTION `repis`.`func_kirjelipikud`;SHOW CREATE FUNCTION `repis`.`func_kirjesildid`;SHOW CREATE FUNCTION `repis`.`func_kivitekst`;SHOW CREATE FUNCTION `repis`.`func_new_kirjekood`;SHOW CREATE FUNCTION `repis`.`func_next_id`;SHOW CREATE FUNCTION `repis`.`func_order_est`;SHOW CREATE FUNCTION `repis`.`func_person_text`;SHOW CREATE FUNCTION `repis`.`func_pers/* large SQL query (4.8 KiB), snipped at 2,000 characters */
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='repis' AND TABLE_NAME='kirjed' ORDER BY ORDINAL_POSITION;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='import';
+SHOW TABLE STATUS FROM `import`;
+SHOW FUNCTION STATUS WHERE `Db`='import';
+SHOW PROCEDURE STATUS WHERE `Db`='import';
+SHOW TRIGGERS FROM `import`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='import';
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='import' AND TABLE_NAME='memoriaal_kivitahvlid' ORDER BY ORDINAL_POSITION;
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='repis' AND TABLE_NAME='kirjed' ORDER BY ORDINAL_POSITION;
+SELECT 
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida
+	    FROM import.memoriaal_kivitahvlid mk
+RIGHT JOIN repis.kirjed k0 ON k0.kirjekood = mk.kirjekood
+   WHERE k0.persoon = '0000064151';
+/* SQL Error (1052): Column 'kirjekood' in field list is ambiguous */
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 0 of 1 query: 0.000 sec. */
+SELECT 
+      'kirjekood', mk.kirjekood, 'kirje', mk.kirje
+	 , 'eesnimi', mk.eesnimi, 'perenimi', mk.perenimi, 'isanimi', mk.isanimi, 'aastad', mk.aastad
+	 , 'tahvel', mk.tahvel, 'tiib', mk.tiib, 'tahvlinr', mk.tahvlinr, 'tulp', mk.tulp, 'rida', mk.rida
+	    FROM import.memoriaal_kivitahvlid mk
+RIGHT JOIN repis.kirjed k0 ON k0.kirjekood = mk.kirjekood
+   WHERE k0.persoon = '0000064151';
+/* Affected rows: 0  Found rows: 7  Warnings: 0  Duration for 1 query: 0.015 sec. */
+SELECT 
+      'kirjekood', mk.kirjekood, 'kirje', mk.kirje
+	 , 'eesnimi', mk.eesnimi, 'perenimi', mk.perenimi, 'isanimi', mk.isanimi, 'aastad', mk.aastad
+	 , 'tahvel', mk.tahvel, 'tiib', mk.tiib, 'tahvlinr', mk.tahvlinr, 'tulp', mk.tulp, 'rida', mk.rida
+	    FROM import.memoriaal_kivitahvlid mk
+RIGHT JOIN repis.kirjed k0 ON k0.kirjekood = mk.kirjekood
+   WHERE k0.persoon = '0000064151'
+	  AND mk.kirjekood IS NOT null;
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 1000;
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='pub' AND TABLE_NAME='nimekirjad' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `nimekirjad` FROM `pub`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='pub'   AND TABLE_NAME='nimekirjad'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='pub'   AND TABLE_NAME='nimekirjad'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 1000, 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 2000, 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 3000, 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 4000, 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 5000, 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 6000, 1000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT `persoon`, `kirje`, `evokirje`, `perenimi`, `eesnimi`, `isanimi`, `emanimi`, `sünd`, `surm`, `sünnikoht`, `surmakoht`, `isPerson`, `kivi`, `emem`, `evo`, `wwiiref`, `mv`, `kirjed`, `pereseosed`, `tahvlikirje`, `updated` FROM `pub`.`nimekirjad` WHERE  `persoon`='0000035110';
+SELECT 
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida
+	    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = '0000035110';
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT 
+      'kirjekood', mk.kirjekood, 'kirje', mk.kirje
+	 , 'eesnimi', mk.eesnimi, 'perenimi', mk.perenimi, 'isanimi', mk.isanimi, 'aastad', mk.aastad
+	 , 'tahvel', mk.tahvel, 'tiib', mk.tiib, 'tahvlinr', mk.tahvlinr, 'tulp', mk.tulp, 'rida', mk.rida
+	    FROM import.memoriaal_kivitahvlid mk
+RIGHT JOIN repis.kirjed k0 ON k0.kirjekood = mk.kirjekood
+   WHERE k0.persoon = '0000035110'
+	  AND mk.kirjekood IS NOT null;
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SELECT CURRENT_USER();
+SHOW CREATE PROCEDURE `pub`.`2pub`;
+CALL `2pub`('0000064151');
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SHOW CREATE TABLE `pub`.`nimekirjad`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='pub' AND TABLE_NAME='nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` ORDER BY `kirje` ASC LIMIT 7000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+SELECT  `persoon`, LEFT(`kirje`, 256), LEFT(`evokirje`, 256),  `perenimi`,  `eesnimi`,  `isanimi`,  `emanimi`,  `sünd`,  `surm`,  `sünnikoht`,  `surmakoht`,  `isPerson`,  `kivi`,  `emem`,  `evo`,  `wwiiref`,  `mv`, LEFT(`kirjed`, 256), LEFT(`pereseosed`, 256), LEFT(`tahvlikirje`, 256),  `updated` FROM `pub`.`nimekirjad` WHERE persoon IN ('0000179169','')
+ ORDER BY `kirje` ASC LIMIT 7000;
+SHOW TABLE STATUS LIKE 'nimekirjad';
+USE `repis`;
+SHOW INDEXES FROM `kirjed` FROM `repis`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='repis'   AND TABLE_NAME='kirjed'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='repis'   AND TABLE_NAME='kirjed'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW CREATE TABLE `repis`.`kirjed`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='repis' AND TABLE_NAME='kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000079456')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000179169')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000114062')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000114062')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE kirjekood = 'VS-4750081'
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT  `persoon`,  `kirjekood`, LEFT(`Kirje`, 256),  `Perenimi`,  `Eesnimi`,  `Isanimi`,  `Emanimi`,  `Sünd`,  `Sünnikoht`,  `Surm`,  `Surmakoht`, LEFT(`Lipikud`, 256), LEFT(`Sildid`, 256),  `RaamatuPere`,  `Sugu`, LEFT(`Kommentaar`, 256),  `Allikas`,  `Puudulik`,  `EkslikKanne`,  `Peatatud`,  `EiArvesta`, LEFT(`KirjeJutt`, 256),  `Matmisaeg`,  `pub_emem`,  `pub_kivi`,  `pub_wwiiref`,  `pub_evo`,  `pub_mv`,  `pub_isPerson`,  `updated_at`,  `updated_by` FROM `repis`.`kirjed` WHERE persoon IN ('0000083934')
+ ORDER BY `Perenimi` ASC, `Eesnimi` ASC LIMIT 1000;
+SHOW TABLE STATUS LIKE 'kirjed';
+SELECT k0.persoon
+     , ifnull(MAX(k0.pub_emem),0) AS pub_emem
+     , ifnull(MAX(k0.pub_kivi),0) AS pub_kivi
+     , IF(mk.persoon IS NULL, '', mk.tahvel) AS kivitahvel
+FROM repis.kirjed k0
+LEFT JOIN repis.kirjed kmk ON kmk.persoon = k0.persoon AND kmk.allikas = 'KIVI'
+LEFT JOIN import.memoriaal_kivitahvlid mk ON mk.kirjekood = kmk.kirjekood
+WHERE k0.persoon IS NOT NULL
+  AND mk.persoon IS NULL
+GROUP BY k0.persoon
+HAVING pub_kivi = 1
+;
+/* Affected rows: 0  Found rows: 206  Warnings: 0  Duration for 1 query: 9.969 sec. */
+/* #1634496361: Access violation at address 00000056BC200000 in module 'heidisql.exe'. Execution of address 00000056BC200000 Message CharCode:27 Msg:256 */
+USE `pub`;
+SELECT CURRENT_USER();
+SHOW CREATE PROCEDURE `pub`.`2pub`;
+USE `repis`;
+SELECT CURRENT_USER();
+SHOW CREATE PROCEDURE `repis`.`aggr_kirjed`;SHOW CREATE PROCEDURE `repis`.`aggr_lipikud`;SHOW CREATE PROCEDURE `repis`.`aggr_persoonid`;SHOW CREATE PROCEDURE `repis`.`aggr_sildid`;SHOW CREATE TABLE `repis`.`allikad`;SHOW CREATE TABLE `repis`.`asukohad`;SHOW CREATE TABLE `repis`.`a_kirjed`;SHOW CREATE TABLE `repis`.`a_lipikud`;SHOW CREATE TABLE `repis`.`a_sildid`;SHOW CREATE EVENT `repis`.`backup`;SHOW CREATE PROCEDURE `repis`.`backup`;SHOW CREATE PROCEDURE `repis`.`backup_table`;SHOW CREATE TABLE `repis`.`counter`;SHOW CREATE TABLE `repis`.`c_lipikud`;SHOW CREATE TABLE `repis`.`c_seoseliigid`;SHOW CREATE TABLE `repis`.`c_sildid`;SHOW CREATE PROCEDURE `repis`.`debug_msg`;SHOW CREATE TABLE `repis`.`desktop`;SHOW CREATE TRIGGER `repis`.`desktop_BI`;SHOW CREATE TRIGGER `repis`.`desktop_BU`;SHOW CREATE FUNCTION `repis`.`desktop_next_id`;SHOW CREATE FUNCTION `repis`.`desktop_person_text`;SHOW CREATE TABLE `repis`.`desk_lipikud`;SHOW CREATE TABLE `repis`.`desk_sildid`;SHOW CREATE FUNCTION `repis`.`emadisad_next_id`;SHOW CREATE TABLE `repis`.`emaisalaud`;SHOW CREATE TRIGGER `repis`.`emaisalaud_AI`;SHOW CREATE TRIGGER `repis`.`emaisalaud_AU`;SHOW CREATE TRIGGER `repis`.`emaisalaud_BI`;SHOW CREATE TRIGGER `repis`.`emaisalaud_BU`;SHOW CREATE TABLE `repis`.`episoodid_0`;SHOW CREATE TABLE `repis`.`failid`;SHOW CREATE PROCEDURE `repis`.`fix_dates`;SHOW CREATE PROCEDURE `repis`.`flush_vorm_kirjed`;SHOW CREATE TABLE `repis`.`fondid`;SHOW CREATE FUNCTION `repis`.`func_aastad`;SHOW CREATE FUNCTION `repis`.`func_capital_case`;SHOW CREATE FUNCTION `repis`.`func_ISO2ppkkaa`;SHOW CREATE FUNCTION `repis`.`func_kirje2persoon`;SHOW CREATE FUNCTION `repis`.`func_kirjelipikud`;SHOW CREATE FUNCTION `repis`.`func_kirjesildid`;SHOW CREATE FUNCTION `repis`.`func_kivitekst`;SHOW CREATE FUNCTION `repis`.`func_new_kirjekood`;SHOW CREATE FUNCTION `repis`.`func_next_id`;SHOW CREATE FUNCTION `repis`.`func_order_est`;SHOW CREATE FUNCTION `repis`.`func_person_text`;SHOW CREATE FUNCTION `repis`.`func_pers/* large SQL query (4.8 KiB), snipped at 2,000 characters */
+SELECT ROUTINE_NAME FROM `information_schema`.`ROUTINES` WHERE ROUTINE_SCHEMA = 'repis' AND ROUTINE_TYPE = 'FUNCTION';
+CREATE DEFINER=`queue`@`localhost` FUNCTION `HeidiSQL_temproutine_1`(
+	`in_persoon` CHAR(10)
+)
+RETURNS longtext CHARSET utf8mb4 COLLATE utf8mb4_bin
+LANGUAGE SQL
+NOT DETERMINISTIC
+CONTAINS SQL
+SQL SECURITY DEFINER
+COMMENT ''
+BEGIN
+  DECLARE _persoon CHAR(10);
+  DECLARE _ret JSON;
+  
+  SET _persoon = repis.func_kirje2persoon(in_persoon);
+
+  SELECT JSON_OBJECT(
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida) INTO _ret
+    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = _persoon;
+  
+  if _ret is NULL
+  then
+    SELECT max(pub_kivi) INTO @pub_kivi FROM repis.kirjed WHERE persoon = in_persoon;
+    if @pub_kivi
+    then
+      SELECT JSON_OBJECT(
+          'kirjekood', kirjekood, repis.func_kivitekst(_persoon), kirje
+        , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', repis.func_aastad(left(sünd,4), left(surm,4))
+        , 'tahvel', 'X', 'tiib', 'L') INTO _ret
+        FROM repis.kirjed
+       WHERE kirjekood = _persoon;
+    END if;
+  END if;
+  
+  RETURN _ret;
+END;
+DROP FUNCTION IF EXISTS `HeidiSQL_temproutine_1`;
+DROP FUNCTION IF EXISTS `json_tahvlikirje`;
+CREATE DEFINER=`queue`@`localhost` FUNCTION `json_tahvlikirje`(
+	`in_persoon` CHAR(10)
+)
+RETURNS longtext CHARSET utf8mb4 COLLATE utf8mb4_bin
+LANGUAGE SQL
+NOT DETERMINISTIC
+CONTAINS SQL
+SQL SECURITY DEFINER
+COMMENT ''
+BEGIN
+  DECLARE _persoon CHAR(10);
+  DECLARE _ret JSON;
+  
+  SET _persoon = repis.func_kirje2persoon(in_persoon);
+
+  SELECT JSON_OBJECT(
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida) INTO _ret
+    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = _persoon;
+  
+  if _ret is NULL
+  then
+    SELECT max(pub_kivi) INTO @pub_kivi FROM repis.kirjed WHERE persoon = in_persoon;
+    if @pub_kivi
+    then
+      SELECT JSON_OBJECT(
+          'kirjekood', kirjekood, repis.func_kivitekst(_persoon), kirje
+        , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', repis.func_aastad(left(sünd,4), left(surm,4))
+        , 'tahvel', 'X', 'tiib', 'L') INTO _ret
+        FROM repis.kirjed
+       WHERE kirjekood = _persoon;
+    END if;
+  END if;
+  
+  RETURN _ret;
+END;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='repis';
+SHOW TABLE STATUS FROM `repis`;
+SHOW FUNCTION STATUS WHERE `Db`='repis';
+SHOW PROCEDURE STATUS WHERE `Db`='repis';
+SHOW TRIGGERS FROM `repis`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='repis';
+SELECT CURRENT_USER();
+SHOW CREATE FUNCTION `repis`.`json_tahvlikirje`;
+/* Entering session "repis" */
+SHOW CREATE PROCEDURE `pub`.`2pub`;SHOW CREATE TABLE `pub`.`nimekirjad`;SHOW CREATE PROCEDURE `pub`.`proc_pereseosed_nimekirja`;SHOW CREATE PROCEDURE `pub`.`proc_sugulased_nimekirja`;SHOW CREATE PROCEDURE `pub`.`repub`;SHOW CREATE PROCEDURE `pub`.`repub_all`;
+CALL pub.2pub('0000138874');
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 1 query: 0.000 sec. */
+SHOW CREATE PROCEDURE `repis`.`aggr_kirjed`;SHOW CREATE PROCEDURE `repis`.`aggr_lipikud`;SHOW CREATE PROCEDURE `repis`.`aggr_persoonid`;SHOW CREATE PROCEDURE `repis`.`aggr_sildid`;SHOW CREATE TABLE `repis`.`allikad`;SHOW CREATE TABLE `repis`.`asukohad`;SHOW CREATE TABLE `repis`.`a_kirjed`;SHOW CREATE TABLE `repis`.`a_lipikud`;SHOW CREATE TABLE `repis`.`a_sildid`;SHOW CREATE EVENT `repis`.`backup`;SHOW CREATE PROCEDURE `repis`.`backup`;SHOW CREATE PROCEDURE `repis`.`backup_table`;SHOW CREATE TABLE `repis`.`counter`;SHOW CREATE TABLE `repis`.`c_lipikud`;SHOW CREATE TABLE `repis`.`c_seoseliigid`;SHOW CREATE TABLE `repis`.`c_sildid`;SHOW CREATE PROCEDURE `repis`.`debug_msg`;SHOW CREATE TABLE `repis`.`desktop`;SHOW CREATE TRIGGER `repis`.`desktop_BI`;SHOW CREATE TRIGGER `repis`.`desktop_BU`;SHOW CREATE FUNCTION `repis`.`desktop_next_id`;SHOW CREATE FUNCTION `repis`.`desktop_person_text`;SHOW CREATE TABLE `repis`.`desk_lipikud`;SHOW CREATE TABLE `repis`.`desk_sildid`;SHOW CREATE FUNCTION `repis`.`emadisad_next_id`;SHOW CREATE TABLE `repis`.`emaisalaud`;SHOW CREATE TRIGGER `repis`.`emaisalaud_AI`;SHOW CREATE TRIGGER `repis`.`emaisalaud_AU`;SHOW CREATE TRIGGER `repis`.`emaisalaud_BI`;SHOW CREATE TRIGGER `repis`.`emaisalaud_BU`;SHOW CREATE TABLE `repis`.`episoodid_0`;SHOW CREATE TABLE `repis`.`failid`;SHOW CREATE PROCEDURE `repis`.`fix_dates`;SHOW CREATE PROCEDURE `repis`.`flush_vorm_kirjed`;SHOW CREATE TABLE `repis`.`fondid`;SHOW CREATE FUNCTION `repis`.`func_aastad`;SHOW CREATE FUNCTION `repis`.`func_capital_case`;SHOW CREATE FUNCTION `repis`.`func_ISO2ppkkaa`;SHOW CREATE FUNCTION `repis`.`func_kirje2persoon`;SHOW CREATE FUNCTION `repis`.`func_kirjelipikud`;SHOW CREATE FUNCTION `repis`.`func_kirjesildid`;SHOW CREATE FUNCTION `repis`.`func_kivitekst`;SHOW CREATE FUNCTION `repis`.`func_new_kirjekood`;SHOW CREATE FUNCTION `repis`.`func_next_id`;SHOW CREATE FUNCTION `repis`.`func_order_est`;SHOW CREATE FUNCTION `repis`.`func_person_text`;SHOW CREATE FUNCTION `repis`.`func_pers/* large SQL query (4.8 KiB), snipped at 2,000 characters */
+CALL repis.json_tahvlikirje('0000138874');
+/* SQL Error (1305): PROCEDURE repis.json_tahvlikirje does not exist */
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 0 of 1 query: 0.000 sec. */
+select repis.json_tahvlikirje('0000138874');
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+CALL pub.2pub('0000138874');
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 1 query: 0.000 sec. */
+select repis.json_tahvlikirje('0000138874');
+/* Affected rows: 0  Found rows: 1  Warnings: 0  Duration for 1 query: 0.000 sec. */
+/* #1634496361: Access violation at address 00000056BC200000 in module 'heidisql.exe'. Execution of address 00000056BC200000 Message CharCode:27 Msg:256 */
+SELECT ROUTINE_NAME FROM `information_schema`.`ROUTINES` WHERE ROUTINE_SCHEMA = 'repis' AND ROUTINE_TYPE = 'FUNCTION';
+CREATE DEFINER=`queue`@`localhost` FUNCTION `HeidiSQL_temproutine_1`(
+	`in_persoon` CHAR(10)
+)
+RETURNS longtext CHARSET utf8mb4 COLLATE utf8mb4_bin
+LANGUAGE SQL
+NOT DETERMINISTIC
+CONTAINS SQL
+SQL SECURITY DEFINER
+COMMENT ''
+BEGIN
+  DECLARE _persoon CHAR(10);
+  DECLARE _ret JSON;
+  
+  SET _persoon = repis.func_kirje2persoon(in_persoon);
+
+  SELECT JSON_OBJECT(
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida) INTO _ret
+    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = _persoon;
+  
+  if _ret is NULL
+  then
+    SELECT max(pub_kivi) INTO @pub_kivi FROM repis.kirjed WHERE persoon = in_persoon;
+    if @pub_kivi
+    then
+      SELECT JSON_OBJECT(
+          'kirjekood', kirjekood, 'kirje', repis.func_kivitekst(_persoon)
+        , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', repis.func_aastad(left(sünd,4), left(surm,4))
+        , 'tahvel', 'X', 'tiib', 'L') INTO _ret
+        FROM repis.kirjed
+       WHERE kirjekood = _persoon;
+    END if;
+  END if;
+  
+  RETURN _ret;
+END;
+DROP FUNCTION IF EXISTS `HeidiSQL_temproutine_1`;
+DROP FUNCTION IF EXISTS `json_tahvlikirje`;
+CREATE DEFINER=`queue`@`localhost` FUNCTION `json_tahvlikirje`(
+	`in_persoon` CHAR(10)
+)
+RETURNS longtext CHARSET utf8mb4 COLLATE utf8mb4_bin
+LANGUAGE SQL
+NOT DETERMINISTIC
+CONTAINS SQL
+SQL SECURITY DEFINER
+COMMENT ''
+BEGIN
+  DECLARE _persoon CHAR(10);
+  DECLARE _ret JSON;
+  
+  SET _persoon = repis.func_kirje2persoon(in_persoon);
+
+  SELECT JSON_OBJECT(
+      'kirjekood', kirjekood, 'kirje', kirje
+	 , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', aastad
+	 , 'tahvel', tahvel, 'tiib', tiib, 'tahvlinr', tahvlinr, 'tulp', tulp, 'rida', rida) INTO _ret
+    FROM import.memoriaal_kivitahvlid
+   WHERE persoon = _persoon;
+  
+  if _ret is NULL
+  then
+    SELECT max(pub_kivi) INTO @pub_kivi FROM repis.kirjed WHERE persoon = in_persoon;
+    if @pub_kivi
+    then
+      SELECT JSON_OBJECT(
+          'kirjekood', kirjekood, 'kirje', repis.func_kivitekst(_persoon)
+        , 'eesnimi', eesnimi, 'perenimi', perenimi, 'isanimi', isanimi, 'aastad', repis.func_aastad(left(sünd,4), left(surm,4))
+        , 'tahvel', 'X', 'tiib', 'L') INTO _ret
+        FROM repis.kirjed
+       WHERE kirjekood = _persoon;
+    END if;
+  END if;
+  
+  RETURN _ret;
+END;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='repis';
+SHOW TABLE STATUS FROM `repis`;
+SHOW FUNCTION STATUS WHERE `Db`='repis';
+SHOW PROCEDURE STATUS WHERE `Db`='repis';
+SHOW TRIGGERS FROM `repis`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='repis';
+SELECT CURRENT_USER();
+SHOW CREATE FUNCTION `repis`.`json_tahvlikirje`;
+/* Entering session "repis" */
+CALL pub.2pub('0000138874');
+/* Affected rows: 0  Found rows: 0  Warnings: 0  Duration for 1 query: 0.015 sec. */
