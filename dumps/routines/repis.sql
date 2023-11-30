@@ -354,7 +354,7 @@ func_label:BEGIN
         LEFT JOIN allikad a ON a.kood = k0.allikas
         WHERE k0.persoon = in_persoon
         AND not a.nonPerson
-        ORDER BY a.prioriteetSurm desc, CHAR_LENGTH(k0.Sünd) DESC;
+        ORDER BY a.prioriteetSünd desc, CHAR_LENGTH(k0.Sünd) DESC;
 
     -- Declare handlers for cursor
     DECLARE CONTINUE HANDLER FOR NOT FOUND
