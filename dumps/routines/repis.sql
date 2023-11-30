@@ -349,7 +349,7 @@ func_label:BEGIN
 
     -- Declare a cursor to iterate over the dataset
     DECLARE date_cursor CURSOR FOR
-        SELECT k0.Sünd
+        SELECT SUBSTRING_INDEX(k0.Sünd,';',1) -- date might be a list
         FROM repis.kirjed k0
         LEFT JOIN allikad a ON a.kood = k0.allikas
         WHERE k0.persoon = in_persoon
@@ -401,7 +401,7 @@ func_label:BEGIN
 
     -- Declare a cursor to iterate over the dataset
     DECLARE date_cursor CURSOR FOR
-        SELECT k0.Surm
+        SELECT SUBSTRING_INDEX(k0.Surm,';',1) -- date might be a list
         FROM repis.kirjed k0
         LEFT JOIN allikad a ON a.kood = k0.allikas
         WHERE k0.persoon = in_persoon
