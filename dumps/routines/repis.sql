@@ -344,7 +344,12 @@ CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `func_person_born`(
 func_label:BEGIN
 
     SET @ret_val = '';
-    SELECT SUBSTRING_INDEX(k.Sünd,';',1) INTO @ret_val
+    SELECT SUBSTRING_INDEX(group_concat(
+          if(k.sünd = '' OR a.prioriteetSünd = 0,
+            NULL, k.sünd)
+          ORDER BY CHAR_LENGTH(SUBSTRING_INDEX(k.Sünd,';',1)) DESC
+                 , a.prioriteetSünd DESC 
+                   SEPARATOR ';'), ';', 1) INTO @ret_val
     FROM repis.kirjed k
     WHERE k.persoon = in_persoon
     ORDER BY CHAR_LENGTH(SUBSTRING_INDEX(k.Sünd,';',1)) DESC, a.prioriteetSünd DESC
