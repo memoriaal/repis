@@ -16,6 +16,40 @@ USE `maintenance`;
 -- Dumping routines for database 'maintenance'
 --
 DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `persoon_aa_vs_pr`()
+BEGIN
+
+  CREATE OR REPLACE TABLE tmp.tmp 
+  SELECT pr.isikukood, aa.persoon
+  FROM import.pereregister pr
+  LEFT JOIN import.album_academicum aa ON aa.pereregister = pr.isikukood
+  WHERE aa.persoon IS NOT null
+  AND pr.persoon IS NULL
+  ;  
+  UPDATE import.pereregister pr
+  RIGHT JOIN tmp.tmp tmp ON tmp.isikukood = pr.isikukood
+  SET pr.persoon = tmp.persoon
+  WHERE tmp.persoon IS NOT null
+  AND pr.persoon IS NULL
+  ;
+  
+  CREATE OR REPLACE TABLE tmp.tmp 
+  SELECT aa.kirjekood, pr.persoon
+  FROM import.album_academicum aa
+  LEFT JOIN import.pereregister pr ON aa.pereregister = pr.isikukood
+  WHERE pr.persoon IS NOT null
+  AND aa.persoon IS null
+  ;
+  UPDATE import.album_academicum aa
+  RIGHT JOIN tmp.tmp tmp ON tmp.kirjekood = aa.kirjekood
+  SET aa.persoon = tmp.persoon
+  WHERE tmp.persoon IS NOT null
+  AND aa.persoon IS null
+  ;
+  
+END ;;
+DELIMITER ;
+DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `populate_sugu`()
 BEGIN
 
