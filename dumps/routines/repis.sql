@@ -343,49 +343,15 @@ CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `func_person_born`(
 ) RETURNS char(10) CHARSET utf8 COLLATE utf8_estonian_ci
 func_label:BEGIN
 
-    DECLARE result_date CHAR(10);
-    DECLARE next_date CHAR(10);
-    DECLARE finished INTEGER DEFAULT 0;
+    SET @ret_val = '';
+    SELECT SUBSTRING_INDEX(k.Sünd,';',1) INTO @ret_val
+    FROM repis.kirjed k
+    WHERE k.persoon = in_persoon
+    ORDER BY CHAR_LENGTH(SUBSTRING_INDEX(k.Sünd,';',1)) DESC, a.prioriteetSünd DESC
+    LIMIT 1
+    ;
 
-    -- Declare a cursor to iterate over the dataset
-    DECLARE date_cursor CURSOR FOR
-        SELECT SUBSTRING_INDEX(k0.Sünd,';',1) -- date might be a list
-        FROM repis.kirjed k0
-        LEFT JOIN allikad a ON a.kood = k0.allikas
-        WHERE k0.persoon = in_persoon
-        AND not a.nonPerson
-        ORDER BY a.prioriteetSünd desc, CHAR_LENGTH(k0.Sünd) DESC;
-
-    -- Declare handlers for cursor
-    DECLARE CONTINUE HANDLER FOR NOT FOUND
-        SET finished = 1;
-
-    -- Open the cursor
-    OPEN date_cursor;
-
-    -- Fetch the first row
-    FETCH date_cursor INTO result_date;
-
-    -- Check if the selected date has low precision
-    read_loop: WHILE CHAR_LENGTH(result_date) < 10 DO
-        -- Fetch the next row
-        FETCH date_cursor INTO next_date;
-        -- Exit loop if no more rows
-        IF finished = 1 THEN
-            LEAVE read_loop;
-        END IF;
-
-        -- Check if the new date is longer and has the same previous date part
-        IF CHAR_LENGTH(next_date) > CHAR_LENGTH(result_date)
-           AND LEFT(next_date, CHAR_LENGTH(result_date)) = result_date THEN
-            SET result_date = next_date;
-        END IF;
-    END WHILE;
-
-    -- Close the cursor
-    CLOSE date_cursor;
-
-    RETURN result_date;
+    RETURN @ret_val;
 
 END ;;
 DELIMITER ;
@@ -1345,8 +1311,16 @@ proc_label:BEGIN
             NULL, UPPER(k0.emanimi))
           ORDER BY a.prioriteetEmanimi  DESC SEPARATOR ';'), ';', 1)
           AS emanimi
-      , repis.func_person_born(in_persoon) AS sünd
-      , repis.func_person_dead(in_persoon) AS surm
+      , SUBSTRING_INDEX(group_concat(
+          if(k0.sünd = ''       OR a.prioriteetSünd     = 0,
+            NULL, k0.sünd)
+          ORDER BY CHAR_LENGTH(SUBSTRING_INDEX(k0.Sünd,';',1)) DESC, a.prioriteetSünd DESC SEPARATOR ';'), ';', 1)
+          AS sünd
+      , SUBSTRING_INDEX(group_concat(
+          if(k0.surm = ''       OR a.prioriteetSurm     = 0,
+            NULL, k0.surm)
+          ORDER BY CHAR_LENGTH(SUBSTRING_INDEX(k0.Surm,';',1)) DESC, a.prioriteetSurm DESC SEPARATOR ';'), ';', 1)
+          AS surm
       , SUBSTRING_INDEX(group_concat(
           if(k0.sünnikoht REGEXP '^\\?*$' OR a.prioriteetSünd     = 0,
             NULL, k0.sünnikoht)
