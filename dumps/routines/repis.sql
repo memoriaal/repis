@@ -566,7 +566,7 @@ BEGIN
 
   DECLARE _kirjekood CHAR(10);
   DECLARE _aeg CHAR(10);
-  DECLARE _asukoht VARCHAR(50);
+  DECLARE _asukoht VARCHAR(100);
   DECLARE _episood VARCHAR(50);
   DECLARE _episoodi_väärtus VARCHAR(255);
 
