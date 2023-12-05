@@ -997,7 +997,8 @@ CREATE TABLE `krossi_metsavennad` (
   `SurmaMaakond` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `Vangilaager` varchar(255) COLLATE utf8_estonian_ci DEFAULT NULL,
   `Elulugu` text COLLATE utf8_estonian_ci DEFAULT NULL,
-  `Allikad` text COLLATE utf8_estonian_ci DEFAULT NULL
+  `Allikad` text COLLATE utf8_estonian_ci DEFAULT NULL,
+  `orig_ID` char(8) COLLATE utf8_estonian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
