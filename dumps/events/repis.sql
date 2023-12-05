@@ -967,7 +967,7 @@ DELIMITER ;;
 
 		INSERT IGNORE INTO z_queue (`kirjekood1`, `kirjekood2`, `task`) 
 		VALUES (OLD.persoon, '', 'proc_NK_refresh');
-	
+
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

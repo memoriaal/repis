@@ -1161,7 +1161,7 @@ DELIMITER ;;
 
 		INSERT IGNORE INTO z_queue (`kirjekood1`, `kirjekood2`, `task`) 
 		VALUES (OLD.persoon, '', 'proc_NK_refresh');
-	
+
 END */;;
 DELIMITER ;
 
