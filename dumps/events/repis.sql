@@ -773,28 +773,32 @@ DELIMITER ;;
       SET NEW.allikas = 'Persoon';
     END if;
 
-    if 'emi' IN (NEW.persoon, NEW.kirjekood)
+    if NEW.kirjekood ='emi'
     then
-      SELECT MAX(persoon) INTO @new_persoon FROM repis.kirjed;
+      if NEW.persoon IS NULL then
+        SELECT LPAD(MAX(persoon)+1, 10, 0) INTO @new_persoon FROM repis.kirjed;
+        SET NEW.persoon = @new_persoon;
+      END if;
       SELECT CONCAT('EMI-', lpad(RIGHT(MAX(kirjekood), 6)+1, 6, '0')) 
 		  INTO @new_kirjekood 
 		  FROM repis.kirjed 
 		 WHERE allikas = 'EMI';
 
-      SET NEW.persoon = @new_persoon;
       SET NEW.kirjekood = @new_kirjekood;
       SET NEW.allikas = 'EMI';
     END if;
 
-    if 'ts' IN (NEW.persoon, NEW.kirjekood)
+    if NEW.kirjekood ='ts'
     then
-      SELECT MAX(persoon) INTO @new_persoon FROM repis.kirjed;
+      if NEW.persoon IS NULL then
+        SELECT LPAD(MAX(persoon)+1, 10, 0) INTO @new_persoon FROM repis.kirjed;
+        SET NEW.persoon = @new_persoon;
+      END if;
       SELECT CONCAT('TS-', lpad(RIGHT(MAX(kirjekood), 7)+1, 7, '0')) 
 		  INTO @new_kirjekood
 		  FROM repis.kirjed 
 		 WHERE allikas = 'TS';
 
-      SET NEW.persoon = @new_persoon;
       SET NEW.kirjekood = @new_kirjekood;
       SET NEW.allikas = 'TS';
     END if;
