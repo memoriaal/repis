@@ -478,8 +478,8 @@ CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `func_TS_KirjePersoon`(
 ) RETURNS varchar(255) CHARSET utf8 COLLATE utf8_estonian_ci
 BEGIN
   SELECT CONCAT_WS( ', '
-   , if(k0.Perenimi = '', NULL, k0.Perenimi)
-   , if(k0.Eesnimi = '', NULL, k0.Eesnimi)
+   , nullif(k0.Perenimi, '')
+   , nullif(k0.Eesnimi, '')
    , if(k0.Isanimi = '', NULL, CONCAT('isa ', k0.Isanimi))
    , if(k0.Emanimi = '', NULL, CONCAT('ema ', k0.Emanimi))
    , if( (k0.Sünd = '' AND k0.Sünnikoht = '')

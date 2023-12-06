@@ -864,8 +864,8 @@ DELIMITER ;;
     IF NEW.allikas = 'TS' THEN
       SET NEW.KirjePersoon = repis.func_TS_KirjePersoon(NEW.kirjekood);
       SET NEW.kirje = concat_ws('. ', 
-                                if(NEW.KirjePersoon = '', NULL, NEW.KirjePersoon), 
-                                if(NEW.kirjeJutt = '', NULL, NEW.kirjeJutt));
+                                nullif(NEW.KirjePersoon, ''), 
+                                nullif(NEW.kirjeJutt, ''));
     END IF;
 
     IF NEW.allikas = 'ELK' THEN
