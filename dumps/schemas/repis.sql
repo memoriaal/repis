@@ -968,6 +968,7 @@ CREATE TABLE `kirjed` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Kirje` text COLLATE utf8_estonian_ci DEFAULT NULL,
   `Perenimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Perenimed` varchar(250) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Eesnimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Isanimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Emanimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
