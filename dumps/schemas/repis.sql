@@ -1011,6 +1011,7 @@ CREATE TABLE `kirjed` (
   KEY `Sünd` (`Sünd`,`Eesnimi`),
   KEY `Eesnimi` (`Eesnimi`,`Sünd`),
   KEY `Perenimi` (`Perenimi`,`Eesnimi`) USING BTREE,
+  FULLTEXT KEY `Perenimed` (`Perenimed`),
   CONSTRAINT `kirjed_allika_fk_allikas_kood` FOREIGN KEY (`Allikas`) REFERENCES `allikad` (`Kood`) ON UPDATE CASCADE,
   CONSTRAINT `kirjed_persoon_fk_kirjed_kirjekood` FOREIGN KEY (`persoon`) REFERENCES `kirjed` (`kirjekood`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;

@@ -16,6 +16,45 @@ USE `import`;
 -- Dumping routines for database 'import'
 --
 DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `func_pr_perenimed`(
+	`in_persoon` INT
+) RETURNS varchar(250) CHARSET utf8 COLLATE utf8_estonian_ci
+BEGIN
+    SELECT group_concat(distinct perenimed SEPARATOR ';') INTO @return_value
+    FROM 
+        (SELECT nullif(isik_perenimi,
+            '') AS perenimed
+        FROM import.pereregister
+        WHERE persoon = in_persoon
+        UNION
+        SELECT nullif(isik_perenimi_endine1,
+            '')
+        FROM import.pereregister
+        WHERE persoon = in_persoon
+        UNION
+        SELECT nullif(isik_perenimi_endine2,
+            '')
+        FROM import.pereregister
+        WHERE persoon = in_persoon
+        UNION
+        SELECT nullif(isik_perenimi_endine3,
+            '')
+        FROM import.pereregister
+        WHERE persoon = in_persoon
+        UNION
+        SELECT nullif(isik_perenimi_endine4,
+            '')
+        FROM import.pereregister
+        UNION
+        SELECT nullif(perenimi,
+            '')
+        FROM repis.kirjed
+        WHERE persoon = in_persoon ) perenimed ;
+    
+    return @return_value;
+END ;;
+DELIMITER ;
+DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `func_PR_sünnikoht`(
 	`in_kirjekood` CHAR(10)
 ) RETURNS varchar(255) CHARSET utf8 COLLATE utf8_estonian_ci

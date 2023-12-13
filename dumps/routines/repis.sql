@@ -1280,6 +1280,7 @@ proc_label:BEGIN
           nimekuju.sünd, nimekuju.surm,
           nimekuju.sünnikoht, nimekuju.surmakoht
         ) COLLATE utf8_estonian_ci
+      , k_u.Perenimed = import.func_pr_perenimed(k_u.persoon)
     WHERE k_u.kirjekood = in_persoon
     ;
     CALL maintenance.update_wwiiref(in_persoon);
