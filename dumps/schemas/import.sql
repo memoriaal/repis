@@ -1616,6 +1616,39 @@ END */;;
 DELIMITER ;
 
 --
+-- Table structure for table `polisforhor`
+--
+
+CREATE TABLE `polisforhor` (
+  `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
+  `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `pereregister` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `perenimi` varchar(20) COLLATE utf8_estonian_ci NOT NULL,
+  `nimevariandid` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `eesnimi` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `synniaeg` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `vanem` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kommentaar` varchar(70) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `asukoht_laager` varchar(60) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `saabunud_kuhu` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `saabumisaeg` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `prot_nr` varchar(20) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `protokolli_vormistamise_koht` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `protokolli_kp` varchar(20) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kood` tinyint(4) unsigned NOT NULL,
+  `kataloog` varchar(10) COLLATE utf8_estonian_ci NOT NULL,
+  `fail` varchar(120) COLLATE utf8_estonian_ci NOT NULL,
+  `jrk` smallint(6) unsigned NOT NULL,
+  PRIMARY KEY (`kirjekood`),
+  KEY `vanem` (`vanem`),
+  KEY `FK_polisforhor_repis.kirjed` (`persoon`),
+  KEY `FK_polisforhor_pereregister` (`pereregister`),
+  CONSTRAINT `FK_polisforhor_pereregister` FOREIGN KEY (`pereregister`) REFERENCES `pereregister` (`isikukood`),
+  CONSTRAINT `FK_polisforhor_polisforhor` FOREIGN KEY (`vanem`) REFERENCES `polisforhor` (`kirjekood`),
+  CONSTRAINT `FK_polisforhor_repis.kirjed` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
 -- Table structure for table `pr_eesnimed`
 --
 
