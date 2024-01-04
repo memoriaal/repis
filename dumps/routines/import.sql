@@ -156,7 +156,8 @@ func_label:BEGIN
       ),
       if(pf.synniaeg='',NULL,concat('Sünd: ', pf.synniaeg)),
       --  saabumisaeg|'', saabunud_kuhu|--, asukoht_laager|''
-      if(pf.saabumisaeg='',NULL,concat('Saabumine: ', pf.saabumisaeg, ' ', pf.saabunud_kuhu, ' ', pf.asukoht_laager))
+      if(pf.saabumisaeg='',NULL,concat('Saabumine: ', pf.saabumisaeg, ' ', pf.saabunud_kuhu)),
+      if(pf.asukoht_laager='',NULL,concat('Põgenikelaager: ', pf.asukoht_laager))
     ) INTO @_kirje
     from import.polisforhor pf
     WHERE pf.kirjekood = _kirjekood COLLATE UTF8_ESTONIAN_CI;
