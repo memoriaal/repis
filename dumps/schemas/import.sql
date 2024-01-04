@@ -1623,6 +1623,7 @@ CREATE TABLE `polisforhor` (
   `kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL,
   `persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `pereregister` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `kirm` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `perenimi` varchar(20) COLLATE utf8_estonian_ci NOT NULL,
   `nimevariandid` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
   `eesnimi` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
@@ -1643,6 +1644,8 @@ CREATE TABLE `polisforhor` (
   KEY `vanem` (`vanem`),
   KEY `FK_polisforhor_repis.kirjed` (`persoon`),
   KEY `FK_polisforhor_pereregister` (`pereregister`),
+  KEY `FK_polisforhor_kirmus4` (`kirm`),
+  CONSTRAINT `FK_polisforhor_kirmus4` FOREIGN KEY (`kirm`) REFERENCES `kirmus4` (`kirjekood`),
   CONSTRAINT `FK_polisforhor_pereregister` FOREIGN KEY (`pereregister`) REFERENCES `pereregister` (`isikukood`),
   CONSTRAINT `FK_polisforhor_polisforhor` FOREIGN KEY (`vanem`) REFERENCES `polisforhor` (`kirjekood`),
   CONSTRAINT `FK_polisforhor_repis.kirjed` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`)
