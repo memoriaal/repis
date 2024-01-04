@@ -144,6 +144,28 @@ func_label:BEGIN
   END ;;
 DELIMITER ;
 DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `kirje_PF`(
+	`_kirjekood` CHAR(10)
+) RETURNS varchar(2000) CHARSET utf8 COLLATE utf8_estonian_ci
+func_label:BEGIN
+
+    SELECT concat_ws('. ',
+      concat_ws(', ',
+          if(pf.perenimi='',NULL,pf.perenimi),
+          if(pf.eesnimi='',NULL,pf.eesnimi)
+      ),
+      if(pf.synniaeg='',NULL,concat('Sünd: ', pf.synniaeg)),
+      --  saabumisaeg|'', saabunud_kuhu|--, asukoht_laager|''
+      if(pf.saabumisaeg='',NULL,concat('Saabumine: ', pf.saabumisaeg, ' ', pf.saabunud_kuhu, ' ', pf.asukoht_laager))
+    ) INTO @_kirje
+    from import.polisforhor pf
+    WHERE pf.kirjekood = _kirjekood COLLATE UTF8_ESTONIAN_CI;
+
+    RETURN @_kirje;
+
+  END ;;
+DELIMITER ;
+DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` FUNCTION `kirje_PR`(
 	`_kirjekood` CHAR(10)
 ) RETURNS varchar(2000) CHARSET utf8 COLLATE utf8_estonian_ci
@@ -551,6 +573,30 @@ proc_label:BEGIN
     WHERE k4.kirjekood = in_kirjekood;
 
   END ;;
+DELIMITER ;
+DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `import_PF`(
+	IN `in_persoon` CHAR(10),
+	IN `in_kirjekood` CHAR(10)
+)
+BEGIN
+
+    SELECT import.kirje_PF(in_kirjekood) INTO @_kirje;
+
+    DELETE FROM repis.kirjed WHERE kirjekood = in_kirjekood;
+
+    INSERT IGNORE INTO repis.kirjed (persoon, kirjekood, Kirje
+           , Perenimi, Eesnimi
+           , Sünd, Allikas)
+    SELECT in_persoon, in_kirjekood, @_kirje
+           , ifnull(pf.perenimi, ''), ifnull(pf.eesnimi, '')
+           , pf.synniaeg, 'PF'
+    FROM import.polisforhor pf
+    WHERE pf.kirjekood = in_kirjekood;
+
+    UPDATE repis.kirjed SET pub_wwiiref = 1 WHERE persoon = in_persoon;
+
+END ;;
 DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `import_PR`(

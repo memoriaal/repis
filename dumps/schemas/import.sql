@@ -1632,9 +1632,9 @@ CREATE TABLE `polisforhor` (
   `asukoht_laager` varchar(60) COLLATE utf8_estonian_ci DEFAULT NULL,
   `saabunud_kuhu` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
   `saabumisaeg` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
-  `prot_nr` varchar(20) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `protokolli_nr` varchar(20) COLLATE utf8_estonian_ci DEFAULT NULL,
   `protokolli_vormistamise_koht` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
-  `protokolli_kp` varchar(20) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `protokolli_kp` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kood` tinyint(4) unsigned NOT NULL,
   `kataloog` varchar(10) COLLATE utf8_estonian_ci NOT NULL,
   `fail` varchar(120) COLLATE utf8_estonian_ci NOT NULL,
@@ -1647,6 +1647,38 @@ CREATE TABLE `polisforhor` (
   CONSTRAINT `FK_polisforhor_polisforhor` FOREIGN KEY (`vanem`) REFERENCES `polisforhor` (`kirjekood`),
   CONSTRAINT `FK_polisforhor_repis.kirjed` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+DELIMITER ;;
+
+  if OLD.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = OLD.kirjekood;
+  END if;
+
+  if NEW.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = NEW.kirjekood;
+
+    CALL import.import_PF(NEW.persoon, NEW.kirjekood);
+  END if;
+  
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+
+  if NEW.persoon IS NOT NULL 
+     AND NEW.pereregister IS NULL 
+	  AND OLD.pereregister IS NULL then
+	 SET @pr_kood = NULL;
+    SELECT isikukood INTO @pr_kood
+	   FROM import.pereregister WHERE persoon = NEW.persoon
+		LIMIT 1;
+	 IF @pr_kood IS NOT NULL then
+	 	SET NEW.pereregister = @pr_kood;
+	 END if;
+  END if;
+  
+END */;;
+DELIMITER ;
 
 --
 -- Table structure for table `pr_eesnimed`
