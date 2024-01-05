@@ -1665,7 +1665,7 @@ DELIMITER ;;
   END if;
   
   if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
-    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+    UPDATE IGNORE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
   END if;
 
   if NEW.persoon IS NOT NULL 
