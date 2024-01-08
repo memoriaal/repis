@@ -274,3 +274,52 @@ END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `leinakuulutused_BU` BEFORE UPDATE ON `leinakuulutused` FOR EACH ROW BEGIN
+
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+
+  if OLD.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = OLD.kirjekood;
+  END if;
+
+  if NEW.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = NEW.kirjekood;
+
+    CALL import.import_VELK(NEW.persoon, NEW.kirjekood);
+  END if;
+  
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+  
+  if     NEW.persoon IS NOT NULL 
+     AND NEW.pereregister IS NULL 
+	  AND OLD.pereregister IS NULL then
+	 SET @pr_kood = NULL;
+    SELECT isikukood INTO @pr_kood
+	   FROM import.pereregister WHERE persoon = NEW.persoon
+		LIMIT 1;
+	 IF @pr_kood IS NOT NULL then
+	 	SET NEW.pereregister = @pr_kood;
+	 END if;
+  END if;
+  
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
