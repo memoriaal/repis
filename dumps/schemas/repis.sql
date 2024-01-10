@@ -906,7 +906,7 @@ DELIMITER ;
 CREATE TABLE `episoodid` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `Kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
-  `Nimetus` enum('','Arreteerimine','Vangistus','Küüditamine','Matmispaik','Asumise algus','Asumiselt vabanemine','Laager','Surm','Vangilaager','Elukoht','Põgenes') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimetus` enum('Arreteerimine','Asumise algus','Asumiselt vabanemine','Elukoht','Küüditamine','Laager','Matmispaik','Põgenes','Saabumine','Surm','Vangilaager','Vangistus','') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `Aeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
   `Asukoht` int(11) unsigned DEFAULT NULL,
   `Väärtus` varchar(50) COLLATE utf8_estonian_ci DEFAULT '',
