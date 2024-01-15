@@ -1629,6 +1629,7 @@ CREATE TABLE `polisforhor` (
   `eesnimi` varchar(30) COLLATE utf8_estonian_ci DEFAULT NULL,
   `synniaeg` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   `vanem` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `vanem_persoon` char(10) COLLATE utf8_estonian_ci DEFAULT NULL,
   `kommentaar` varchar(70) COLLATE utf8_estonian_ci DEFAULT NULL,
   `asukoht_laager` varchar(60) COLLATE utf8_estonian_ci DEFAULT NULL,
   `saabunud_kuhu` varchar(50) COLLATE utf8_estonian_ci DEFAULT NULL,
