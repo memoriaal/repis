@@ -1553,3 +1553,26 @@ USE `repis`;
 
 --
 -- Final view structure for view `kirjed_v`
+--
+
+
+--
+-- Final view structure for view `my_desktop`
+--
+
+
+--
+-- Final view structure for view `persoonide_represseerimised`
+--
+
+
+--
+-- Final view structure for view `persoonikirjed`
+--
+
+
+--
+-- Final view structure for view `represseeritud`
+--
+
+
