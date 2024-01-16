@@ -100,3 +100,565 @@ END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `album_academicum_BU` BEFORE UPDATE ON `album_academicum` FOR EACH ROW proc_label:BEGIN
+
+DECLARE _source VARCHAR(50) DEFAULT 'album_academicum_BU';
+
+if true then
+
+  -- midagi ei muutunud - midagi ei tee
+  if  ifnull(OLD.persoon,'') = ifnull(NEW.persoon,'')
+  AND ifnull(OLD.pereregister,'') = ifnull(NEW.pereregister,'') then
+    leave proc_label;
+  END if;
+
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+
+  if OLD.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = OLD.kirjekood;
+  END if;
+
+  if NEW.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = NEW.kirjekood;
+
+    CALL import.import_AA(NEW.persoon, NEW.kirjekood);
+  END if;
+  
+  if     NEW.persoon IS NOT NULL 
+     AND NEW.pereregister IS NULL 
+	  AND OLD.pereregister IS NULL then
+	 SET @pr_kood = NULL;
+    SELECT isikukood INTO @pr_kood
+	   FROM import.pereregister WHERE persoon = NEW.persoon
+		LIMIT 1;
+	 IF @pr_kood IS NOT NULL then
+	 	SET NEW.pereregister = @pr_kood;
+	 END if;
+  END if;
+
+END if;  
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `el_kart_BU` BEFORE UPDATE ON `el_kart` FOR EACH ROW BEGIN
+	if true then
+	   IF NEW.persoon = '0' THEN
+	   	SELECT LPAD(MAX(persoon)+1, 10, '0') FROM repis.kirjed INTO @new_persoon;
+	   	INSERT INTO repis.kirjed (persoon, kirjekood, allikas)
+	   	VALUES (@new_persoon, @new_persoon, 'persoon');
+	   	SET NEW.persoon = @new_persoon;
+	   END IF;
+
+	   IF length(NEW.persoon) = 10 THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NEW.persoon
+	      WHERE kirjekood = NEW.kirjekood;
+	   END IF;
+	
+	   IF NEW.persoon IS NULL THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NULL
+	      WHERE kirjekood = NEW.kirjekood;
+	   END IF;
+	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `el_kart_AU` AFTER UPDATE ON `el_kart` FOR EACH ROW BEGIN
+	if true then
+		if NEW.persoon <> IFNULL(OLD.persoon, 'NULL')
+		then
+	  		CALL import.import_ELK(NEW.persoon, NEW.kirjekood);
+	  		CALL repis.proc_NK_refresh(NEW.persoon, NEW.kirjekood);
+	  	END if;
+  	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `kirmus4_BU` BEFORE UPDATE ON `kirmus4` FOR EACH ROW BEGIN
+	if true then
+	   IF NEW.persoon = '0' THEN
+	   	SELECT LPAD(MAX(persoon)+1, 10, '0') FROM repis.kirjed INTO @new_persoon;
+	   	INSERT INTO repis.kirjed (persoon, kirjekood, allikas)
+	   	VALUES (@new_persoon, @new_persoon, 'persoon');
+	   	SET NEW.persoon = @new_persoon;
+	   END IF;
+
+	   IF length(NEW.persoon) = 10 THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NEW.persoon
+	      WHERE kirjekood = NEW.kirjekood;
+	   END IF;
+	
+	   IF NEW.persoon IS NULL THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NULL
+	      WHERE kirjekood = NEW.kirjekood;
+	   END IF;
+	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `kirmus4_AU` AFTER UPDATE ON `kirmus4` FOR EACH ROW BEGIN
+	if true then
+		if NEW.persoon <> IFNULL(OLD.persoon, 'NULL')
+		then
+	  		CALL import.import_KIRM(NEW.persoon, NEW.kirjekood);
+	  		CALL repis.proc_NK_refresh(NEW.persoon, NEW.kirjekood);
+	  	END if;
+  	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `leinakuulutused_BU` BEFORE UPDATE ON `leinakuulutused` FOR EACH ROW BEGIN
+
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+
+  if OLD.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = OLD.kirjekood;
+  END if;
+
+  if NEW.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = NEW.kirjekood;
+
+    CALL import.import_VELK(NEW.persoon, NEW.kirjekood);
+  END if;
+  
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+  
+  if     NEW.persoon IS NOT NULL 
+     AND NEW.pereregister IS NULL 
+	  AND OLD.pereregister IS NULL then
+	 SET @pr_kood = NULL;
+    SELECT isikukood INTO @pr_kood
+	   FROM import.pereregister WHERE persoon = NEW.persoon
+		LIMIT 1;
+	 IF @pr_kood IS NOT NULL then
+	 	SET NEW.pereregister = @pr_kood;
+	 END if;
+  END if;
+  
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `pensionitoimikud_BU` BEFORE UPDATE ON `pensionitoimikud` FOR EACH ROW BEGIN
+	if true then
+	   IF length(NEW.persoon) = 10
+		THEN
+	      UPDATE repis.kirjed
+	      SET persoon = NEW.persoon
+	      WHERE kirjekood = NEW.kirjekood;
+	   END IF;
+	
+	   IF NEW.persoon in ('?', '') THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NULL
+	      WHERE kirjekood = NEW.kirjekood;
+	  	END if;
+   END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `pensionitoimikud_AU` AFTER UPDATE ON `pensionitoimikud` FOR EACH ROW BEGIN
+	if true then
+		if NEW.persoon <> IFNULL(OLD.persoon, 'NULL')
+		then
+	  		CALL import.import_RPT(NEW.persoon, NEW.kirjekood);
+	  		CALL repis.proc_NK_refresh(NEW.persoon, NEW.kirjekood);
+	  	END if;
+  	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `pereregister_BU` BEFORE UPDATE ON `pereregister` FOR EACH ROW BEGIN
+	if true then
+	   IF NEW.persoon = '0' THEN
+	   	SELECT LPAD(MAX(persoon)+1, 10, '0') FROM repis.kirjed INTO @new_persoon;
+	   	INSERT INTO repis.kirjed (persoon, kirjekood, allikas)
+	   	VALUES (@new_persoon, @new_persoon, 'persoon');
+	   	SET NEW.persoon = @new_persoon;
+	   END IF;
+
+	   IF length(NEW.persoon) = 10 THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NEW.persoon
+	      WHERE kirjekood = NEW.isikukood;
+	   END IF;
+	
+	   IF NEW.persoon IS NULL AND OLD.persoon IS NOT NULL THEN
+	      UPDATE repis.kirjed SET persoon = '0000000000'
+  	      WHERE kirjekood = NEW.isikukood;
+	      DELETE IGNORE FROM repis.kirjed
+	      WHERE kirjekood = NEW.isikukood;
+	   END IF;
+
+   END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `pereregister_AU` AFTER UPDATE ON `pereregister` FOR EACH ROW BEGIN
+	if true then
+		if NEW.persoon <> IFNULL(OLD.persoon, 'NULL')
+		then
+	  		CALL import.import_PR(NEW.persoon, NEW.isikukood);
+	  		CALL repis.proc_NK_refresh(NEW.persoon, NEW.isikukood);
+	  	END if;
+  	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `polisforhor_BU` BEFORE UPDATE ON `polisforhor` FOR EACH ROW BEGIN
+
+  if OLD.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = OLD.kirjekood;
+  END if;
+
+  if NEW.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = NEW.kirjekood;
+
+    CALL import.import_PF(NEW.persoon, NEW.kirjekood);
+  END if;
+  
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE IGNORE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+
+  if NEW.persoon IS NOT NULL 
+     AND NEW.pereregister IS NULL 
+	  AND OLD.pereregister IS NULL then
+	 SET @pr_kood = NULL;
+    SELECT isikukood INTO @pr_kood
+	   FROM import.pereregister WHERE persoon = NEW.persoon
+		LIMIT 1;
+	 IF @pr_kood IS NOT NULL then
+	 	SET NEW.pereregister = @pr_kood;
+	 END if;
+  END if;
+  
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `rahvastikuregister_BI` BEFORE INSERT ON `rahvastikuregister` FOR EACH ROW BEGIN
+    DECLARE last_id INT;
+    SELECT MAX(CAST(RIGHT(kirjekood, 7) AS UNSIGNED)) INTO last_id FROM rahvastikuregister;
+    SET NEW.kirjekood = CONCAT('RR-', LPAD(last_id + 1, 7, '0'));
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `rahvastikuregister_BU` BEFORE UPDATE ON `rahvastikuregister` FOR EACH ROW BEGIN
+	if true then
+	   IF length(NEW.persoon) = 10
+		THEN
+	      UPDATE repis.kirjed
+	      SET persoon = NEW.persoon
+	      WHERE kirjekood = NEW.kirjekood;
+	   END IF;
+	
+	   IF NEW.persoon in ('?', '') THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NULL
+	      WHERE kirjekood = NEW.kirjekood;
+	  	END if;
+   END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `rahvastikuregister_AU` AFTER UPDATE ON `rahvastikuregister` FOR EACH ROW BEGIN
+	if true then
+		if NEW.persoon <> IFNULL(OLD.persoon, 'NULL')
+		then
+	  		CALL import.import_RR(NEW.persoon, NEW.kirjekood);
+	  		CALL repis.proc_NK_refresh(NEW.persoon, NEW.kirjekood);
+	  	END if;
+  	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `repr_kart_BU` BEFORE UPDATE ON `repr_kart` FOR EACH ROW BEGIN
+	if true then
+	   IF NEW.persoon = '0' THEN
+	   	SELECT LPAD(MAX(persoon)+1, 10, '0') FROM repis.kirjed INTO @new_persoon;
+	   	INSERT INTO repis.kirjed (persoon, kirjekood, allikas)
+	   	VALUES (@new_persoon, @new_persoon, 'persoon');
+	   	SET NEW.persoon = @new_persoon;
+	   END IF;
+
+	   IF length(NEW.persoon) = 10 THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NEW.persoon
+	      WHERE kirjekood = NEW.isikukood;
+	   END IF;
+	
+	   IF NEW.persoon IS NULL THEN
+	      UPDATE IGNORE repis.kirjed
+	      SET persoon = NULL
+	      WHERE kirjekood = NEW.isikukood;
+	   END IF;
+	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `repr_kart_AU` AFTER UPDATE ON `repr_kart` FOR EACH ROW BEGIN
+	if true then
+		if NEW.persoon <> IFNULL(OLD.persoon, 'NULL')
+		then
+	  		CALL import.import_RK(NEW.persoon, NEW.isikukood);
+	  		CALL repis.proc_NK_refresh(NEW.persoon, NEW.isikukood);
+	  	END if;
+  	END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `swedish_death_index_BU` BEFORE UPDATE ON `swedish_death_index` FOR EACH ROW BEGIN
+
+  if OLD.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = OLD.kirjekood;
+  END if;
+
+  if NEW.persoon IS NOT NULL then
+    DELETE IGNORE FROM repis.kirjed
+    WHERE kirjekood = NEW.kirjekood;
+
+    CALL import.import_SDI(NEW.persoon, NEW.kirjekood);
+  END if;
+  
+  if NEW.persoon IS NOT NULL AND NEW.pereregister IS NOT NULL then
+    UPDATE import.pereregister SET persoon = NEW.persoon WHERE isikukood = NEW.pereregister;
+  END if;
+
+  if     NEW.persoon IS NOT NULL 
+     AND NEW.pereregister IS NULL 
+	  AND OLD.pereregister IS NULL then
+	 SET @pr_kood = NULL;
+    SELECT isikukood INTO @pr_kood
+	   FROM import.pereregister WHERE persoon = NEW.persoon
+		LIMIT 1;
+	 IF @pr_kood IS NOT NULL then
+	 	SET NEW.pereregister = @pr_kood;
+	 END if;
+  END if;
+  
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
