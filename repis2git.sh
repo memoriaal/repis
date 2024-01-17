@@ -7,16 +7,16 @@ git pull
 
 dateformat="%Y-%m-%dT%H:%M:%SZ"
 
-echo "at $(date +"${dateformat}"): Dumping events..."
+echo "$(date +"${dateformat}"): Dumping events..."
 . "${root_dir}/scripts/dump_events.sh"
 
-echo "at $(date +"${dateformat}"): Dumping schemas..."
+echo "$(date +"${dateformat}"): Dumping schemas..."
 . "${root_dir}/scripts/dump_schemas.sh"
 
-echo "at $(date +"${dateformat}"): Dumping routines..."
+echo "$(date +"${dateformat}"): Dumping routines..."
 . "${root_dir}/scripts/dump_routines.sh"
 
-echo "at $(date +"${dateformat}"): commiting changes..."
+echo "$(date +"${dateformat}"): commiting changes..."
 # commit changes
 git add .
 
