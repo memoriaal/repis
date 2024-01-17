@@ -10,6 +10,6 @@ processes=`ps aux | grep "${signature}" | grep -v grep | awk '{print $2}' | grep
 
 # Kill all processes matching the signature
 for process in $processes; do
-    echo "Killing process ${process}..."
+    # echo "Killing process ${process}..."
     kill $process
 done
