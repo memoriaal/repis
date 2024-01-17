@@ -11,9 +11,9 @@ source "$script_dir/../.env"
 # Iterate over all $MYSQL_DATABASES
 
 for db in ${MYSQL_DATABASES[@]}; do
-  echo "Dumping routines for database ${db}..."
+  # echo "Dumping routines for database ${db}..."
   . "${script_dir}/establish_tunnel.sh"
   mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --databases ${db} --routines --no-create-info --no-data --skip-triggers | grep -v "/*!" | head -n -2 > dumps/routines/${db}.sql
   . "${script_dir}/close_tunnel.sh"
-  echo "Dumped routines for database ${db}."
+  # echo "Dumped routines for database ${db}."
 done

@@ -9,9 +9,9 @@ source "$script_dir/../.env"
 
 # Loop through all the databases
 for db in ${MYSQL_DATABASES[@]}; do
-  echo "Dumping events for ${db}..."
+  # echo "Dumping events for ${db}..."
   . "${script_dir}/establish_tunnel.sh"
   mysqldump -h 127.0.0.1 --port=$SSH_LOCAL_PORT -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --events --no-data --no-create-info ${db} | head -n -2 > dumps/events/${db}.sql
   . "${script_dir}/close_tunnel.sh"
-  echo "Events for ${db} dumped."
+  # echo "Events for ${db} dumped."
 done
