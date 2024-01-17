@@ -5,10 +5,18 @@ cd "${root_dir}"
 
 git pull
 
+localIsoDateTime=$(date +"%Y-%m-%dT%H:%M:%SZ")
+
+echo "at ${localIsoDateTime}: Dumping events..."
 . "${root_dir}/scripts/dump_events.sh"
+
+echo "at ${localIsoDateTime}: Dumping schemas..."
 . "${root_dir}/scripts/dump_schemas.sh"
+
+echo "at ${localIsoDateTime}: Dumping routines..."
 . "${root_dir}/scripts/dump_routines.sh"
 
+echo "at ${localIsoDateTime}: commiting changes..."
 # commit changes
 git add .
 
