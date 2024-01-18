@@ -85,6 +85,29 @@ WHERE sood.sugu LIKE '%,'
 END ;;
 DELIMITER ;
 DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `trim_spaces`()
+BEGIN
+
+    update repis.kirjed
+    set perenimi = trim(eesnimi)
+    where eesnimi regexp "^ | $"
+    ;
+    update repis.kirjed
+    set perenimi = trim(perenimi)
+    where perenimi regexp "^ | $"
+    ;
+    update repis.kirjed
+    set emanimi = trim(emanimi)
+    where emanimi regexp "^ | $"
+    ;
+    update repis.kirjed
+    set isanimi = trim(isanimi)
+    where isanimi regexp "^ | $"
+    ;
+
+END ;;
+DELIMITER ;
+DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `update_wwiiref`(
 	IN `in_persoon` CHAR(10)
 )
