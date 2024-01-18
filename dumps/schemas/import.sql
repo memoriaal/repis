@@ -888,15 +888,6 @@ CREATE TABLE `hukatud_41_44` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
--- Table structure for table `imporditabelid`
---
-
-CREATE TABLE `imporditabelid` (
-  `nimi` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
-  PRIMARY KEY (`nimi`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
-
---
 -- Table structure for table `jeh`
 --
 
