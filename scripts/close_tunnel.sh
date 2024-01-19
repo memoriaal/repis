@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# idle for 1 second before closing the tunnel
-sleep 1
+# idle for 3 second before closing the tunnel
+sleep 3
 
 # Load environment variables
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
