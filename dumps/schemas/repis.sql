@@ -905,7 +905,7 @@ DELIMITER ;
 
 CREATE TABLE `episoodi_liik` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nimetus` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimetus` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
   `Kirjeldus` tinytext COLLATE utf8_estonian_ci DEFAULT NULL,
   `Aeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
   `Asukoht` int(11) unsigned DEFAULT NULL,
@@ -922,13 +922,15 @@ CREATE TABLE `episoodi_liik` (
 CREATE TABLE `episoodid` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `Kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
-  `Nimetus` enum('Arreteerimine','Asumise algus','Asumiselt vabanemine','Elukoht','Küüditamine','Laager','Matmispaik','Põgenes','Saabumine','Surm','Vangilaager','Vangistus','') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Nimetus` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
   `Aeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
   `Asukoht` int(11) unsigned DEFAULT NULL,
   `Väärtus` varchar(50) COLLATE utf8_estonian_ci DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`) USING BTREE,
   KEY `Asukoht` (`Asukoht`) USING BTREE,
+  KEY `FK_episoodid_episoodi_liik` (`Nimetus`),
+  CONSTRAINT `FK_episoodid_episoodi_liik` FOREIGN KEY (`Nimetus`) REFERENCES `episoodi_liik` (`Nimetus`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `episoodid_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci ROW_FORMAT=DYNAMIC;
 
