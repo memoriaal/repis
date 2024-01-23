@@ -900,6 +900,22 @@ DELIMITER ;;
 DELIMITER ;
 
 --
+-- Table structure for table `episoodi_liik`
+--
+
+CREATE TABLE `episoodi_liik` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nimetus` varchar(50) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
+  `Kirjeldus` tinytext COLLATE utf8_estonian_ci DEFAULT NULL,
+  `Aeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
+  `Asukoht` int(11) unsigned DEFAULT NULL,
+  `LõpuAeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
+  `LõpuAsukoht` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Nimetus` (`Nimetus`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
 -- Table structure for table `episoodid`
 --
 
@@ -910,29 +926,11 @@ CREATE TABLE `episoodid` (
   `Aeg` char(10) COLLATE utf8_estonian_ci DEFAULT '',
   `Asukoht` int(11) unsigned DEFAULT NULL,
   `Väärtus` varchar(50) COLLATE utf8_estonian_ci DEFAULT '',
-  `Kinnitatud` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`) USING BTREE,
   KEY `Asukoht` (`Asukoht`) USING BTREE,
   CONSTRAINT `episoodid_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci ROW_FORMAT=DYNAMIC;
-
---
--- Table structure for table `episoodid_0`
---
-
-CREATE TABLE `episoodid_0` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `Kirjekood` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
-  `Aeg` char(10) COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
-  `Asukoht` int(11) unsigned DEFAULT NULL,
-  `Nimetus` enum('','Arreteerimine','Vangistus','Küüditamine','Matmispaik','Asumise algus','Asumiselt vabanemine','Laager','Surm','Vangilaager') COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
-  `kinnitatud` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `Kirjekood` (`Kirjekood`,`Nimetus`,`Aeg`,`Asukoht`),
-  KEY `Asukoht` (`Asukoht`),
-  CONSTRAINT `episoodid_0_ibfk_1` FOREIGN KEY (`Asukoht`) REFERENCES `asukohad` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
 -- Table structure for table `failid`
