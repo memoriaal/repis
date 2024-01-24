@@ -50,6 +50,75 @@ BEGIN
 END ;;
 DELIMITER ;
 DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `persoon_lk_vs_pr`()
+BEGIN
+
+  CREATE OR REPLACE TABLE tmp.tmp 
+  SELECT pr.isikukood, lk.persoon
+  FROM import.pereregister pr
+  LEFT JOIN import.leinakuulutused lk ON lk.pereregister = pr.isikukood
+  WHERE lk.persoon IS NOT null
+  AND pr.persoon IS NULL
+  ;  
+  UPDATE import.pereregister pr
+  RIGHT JOIN tmp.tmp tmp ON tmp.isikukood = pr.isikukood
+  SET pr.persoon = tmp.persoon
+  WHERE tmp.persoon IS NOT null
+  AND pr.persoon IS NULL
+  ;
+  
+  CREATE OR REPLACE TABLE tmp.tmp 
+  SELECT lk.kirjekood, pr.persoon
+  FROM import.leinakuulutused lk
+  LEFT JOIN import.pereregister pr ON lk.pereregister = pr.isikukood
+  WHERE pr.persoon IS NOT null
+  AND lk.persoon IS null
+  ;
+  UPDATE import.leinakuulutused lk
+  RIGHT JOIN tmp.tmp tmp ON tmp.kirjekood = lk.kirjekood
+  SET lk.persoon = tmp.persoon
+  WHERE tmp.persoon IS NOT null
+  AND lk.persoon IS null
+  ;
+  
+END ;;
+DELIMITER ;
+DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `persoon_pr_vs_kirjed`()
+BEGIN
+
+-- pereregistrikirjed kirjetes (repis.kirjed), persoon tagasi toomata
+  CREATE OR REPLACE TABLE tmp.tmp 
+  SELECT pr.isikukood, kk.persoon
+  FROM import.pereregister pr
+  LEFT JOIN repis.kirjed kk ON kk.allikas = 'pr' and kk.kirjekood = pr.isikukood
+  WHERE kk.persoon IS NOT null
+  AND pr.persoon IS NULL
+  ;  
+  UPDATE import.pereregister pr
+  RIGHT JOIN tmp.tmp tmp ON tmp.isikukood = pr.isikukood
+  SET pr.persoon = tmp.persoon
+  WHERE tmp.persoon IS NOT null
+  AND pr.persoon IS NULL
+  ;
+  
+  CREATE OR REPLACE TABLE tmp.tmp 
+  SELECT lk.kirjekood, pr.persoon
+  FROM import.leinakuulutused lk
+  LEFT JOIN import.pereregister pr ON lk.pereregister = pr.isikukood
+  WHERE pr.persoon IS NOT null
+  AND lk.persoon IS null
+  ;
+  UPDATE import.leinakuulutused lk
+  RIGHT JOIN tmp.tmp tmp ON tmp.kirjekood = lk.kirjekood
+  SET lk.persoon = tmp.persoon
+  WHERE tmp.persoon IS NOT null
+  AND lk.persoon IS null
+  ;
+  
+END ;;
+DELIMITER ;
+DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `populate_sugu`()
 BEGIN
 
