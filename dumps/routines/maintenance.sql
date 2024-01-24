@@ -94,7 +94,8 @@ BEGIN
   LEFT JOIN repis.kirjed kk ON kk.allikas = 'pr' and kk.kirjekood = pr.isikukood
   WHERE kk.persoon IS NOT null
   AND pr.persoon IS NULL
-  ;  
+  ;
+  -- Sync kirjed -> PR
   UPDATE import.pereregister pr
   RIGHT JOIN tmp.tmp tmp ON tmp.isikukood = pr.isikukood
   SET pr.persoon = tmp.persoon
@@ -102,20 +103,23 @@ BEGIN
   AND pr.persoon IS NULL
   ;
   
+  -- PR tabelisse ripakile jäänud seosed uuesti kirjetesse importida
   CREATE OR REPLACE TABLE tmp.tmp 
-  SELECT lk.kirjekood, pr.persoon
-  FROM import.leinakuulutused lk
-  LEFT JOIN import.pereregister pr ON lk.pereregister = pr.isikukood
+  SELECT pr.isikukood, pr.persoon
+  FROM import.pereregister pr
+  LEFT JOIN repis.kirjed kk ON kk.allikas = 'pr' and kk.kirjekood = pr.isikukood
   WHERE pr.persoon IS NOT null
-  AND lk.persoon IS null
+  AND kk.persoon IS null
   ;
-  UPDATE import.leinakuulutused lk
-  RIGHT JOIN tmp.tmp tmp ON tmp.kirjekood = lk.kirjekood
-  SET lk.persoon = tmp.persoon
-  WHERE tmp.persoon IS NOT null
-  AND lk.persoon IS null
-  ;
-  
+
+  update import.pereregister pr
+  right join tmp.tmp tmp on tmp.isikukood = pr.isikukood
+  set pr.persoon = null;
+
+  update import.pereregister pr
+  right join tmp.tmp tmp on tmp.isikukood = pr.isikukood
+  set pr.persoon = tmp.persoon;
+
 END ;;
 DELIMITER ;
 DELIMITER ;;
