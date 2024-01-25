@@ -450,6 +450,13 @@ DELIMITER ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `polisforhor_BU` BEFORE UPDATE ON `polisforhor` FOR EACH ROW BEGIN
 
+  IF NEW.persoon = '0' THEN
+	   	SELECT LPAD(MAX(persoon)+1, 10, '0') FROM repis.kirjed INTO @new_persoon;
+	   	INSERT INTO repis.kirjed (persoon, kirjekood, allikas)
+	   	VALUES (@new_persoon, @new_persoon, 'persoon');
+	   	SET NEW.persoon = @new_persoon;
+  END IF;
+       
   if OLD.persoon IS NOT NULL then
     DELETE IGNORE FROM repis.kirjed
     WHERE kirjekood = OLD.kirjekood;
