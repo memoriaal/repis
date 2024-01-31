@@ -886,6 +886,3 @@ proc_label:BEGIN
     FROM import.repr_kart rk
     WHERE rk.isikukood = _kirjekood;
     
-  END ;;
-DELIMITER ;
-
