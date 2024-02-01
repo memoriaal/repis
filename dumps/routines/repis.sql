@@ -1257,6 +1257,11 @@ proc_label:BEGIN
           ORDER BY a.prioriteetSünd     DESC SEPARATOR '$€'), '$€', 1)
           AS sünnikoht
       , SUBSTRING_INDEX(group_concat(
+          if(k0.elukoht REGEXP '^\\?*$' OR a.prioriteetSünd     = 0,
+            NULL, k0.elukoht)
+          ORDER BY a.prioriteetSünd     DESC SEPARATOR '$€'), '$€', 1)
+          AS elukoht
+      , SUBSTRING_INDEX(group_concat(
           if(k0.surmakoht REGEXP '^\\?*$' OR a.prioriteetSurm     = 0,
             NULL, k0.surmakoht)
           ORDER BY a.prioriteetSurm     DESC SEPARATOR '$€'), '$€', 1)
@@ -1273,6 +1278,7 @@ proc_label:BEGIN
       , k_u.sünd = ifnull(if(nimekuju.sünd = '-', '', nimekuju.sünd), '')
       , k_u.surm = ifnull(if(nimekuju.surm = '-', '', nimekuju.surm), '')
       , k_u.sünnikoht = ifnull(nimekuju.sünnikoht, '')
+      , k_u.elukoht = ifnull(nimekuju.elukoht, '')
       , k_u.surmakoht = ifnull(nimekuju.surmakoht, '')
       , k_u.kirje = repis.desktop_person_text(
           nimekuju.perenimi, nimekuju.eesnimi,
