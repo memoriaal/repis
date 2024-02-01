@@ -181,6 +181,22 @@ BEGIN
 END ;;
 DELIMITER ;
 DELIMITER ;;
+CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `update_elukoht`()
+BEGIN
+  update repis.kirjed k0
+  right join import.el_kart elk on elk.kirjekood=k0.kirjekood
+  set k0.Elukoht = elk.`9. Elukoht Eestis`
+  where k0.Elukoht = ''
+  and elk.`9. Elukoht Eestis` > '';
+  
+  update repis.kirjed k0
+  right join import.pereregister pr on pr.isikukood=k0.kirjekood
+  set k0.Elukoht = pr.raamatu_omavalitsus
+  where k0.Elukoht = ''
+  and pr.raamatu_omavalitsus > '';
+END ;;
+DELIMITER ;
+DELIMITER ;;
 CREATE DEFINER=`michelek`@`127.0.0.1` PROCEDURE `update_wwiiref`(
 	IN `in_persoon` CHAR(10)
 )
