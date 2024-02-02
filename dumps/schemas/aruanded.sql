@@ -595,3 +595,16 @@ USE `aruanded`;
 
 --
 -- Final view structure for view `segased_sood`
+--
+
+
+--
+-- Final view structure for view `topelt_kivikirjed`
+--
+
+
+--
+-- Final view structure for view `uued_kivikirjed`
+--
+
+
