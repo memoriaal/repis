@@ -2232,3 +2232,21 @@ USE `import`;
 
 --
 -- Final view structure for view `el_kart_view`
+--
+
+
+--
+-- Final view structure for view `eraf_nimistu_v`
+--
+
+
+--
+-- Final view structure for view `erisurmaaktid_kivita`
+--
+
+
+--
+-- Final view structure for view `krossi_metsavennad_X_repis`
+--
+
+
