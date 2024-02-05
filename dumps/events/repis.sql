@@ -741,3 +741,331 @@ DELIMITER ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`queue`@`localhost`*/ /*!50003 TRIGGER `kirjed_BI` BEFORE INSERT ON `kirjed` FOR EACH ROW proc_label:BEGIN
+
+    DECLARE msg VARCHAR(2000);
+
+    IF NEW.created_by != SUBSTRING_INDEX(user(), '@', 1) 
+       AND NEW.created_by != 'michelek@localhost'
+		 AND false THEN
+      SELECT concat_ws(user(), '\n'
+        , 'Kirjeid saab lisada ainult töölaualt.'
+      ) INTO msg;
+      SIGNAL SQLSTATE '03100' SET MESSAGE_TEXT = msg;
+    END IF;
+    
+    if NEW.persoon = '0'
+    then
+      SELECT LPAD(MAX(persoon)+1, 10, 0) INTO @new_persoon FROM repis.kirjed;
+      SET NEW.persoon = @new_persoon;
+      SET NEW.kirjekood = @new_persoon;
+      SET NEW.allikas = 'Persoon';
+    END if;
+
+    if NEW.kirjekood ='emi'
+    then
+      if NEW.persoon IS NULL then
+        SELECT LPAD(MAX(persoon)+1, 10, 0) INTO @new_persoon FROM repis.kirjed;
+        SET NEW.persoon = @new_persoon;
+      END if;
+      SELECT CONCAT('EMI-', lpad(RIGHT(MAX(kirjekood), 6)+1, 6, '0')) 
+		  INTO @new_kirjekood 
+		  FROM repis.kirjed 
+		 WHERE allikas = 'EMI';
+
+      SET NEW.kirjekood = @new_kirjekood;
+      SET NEW.allikas = 'EMI';
+    END if;
+
+    if NEW.kirjekood ='ts'
+    then
+      if NEW.persoon IS NULL then
+        SELECT LPAD(MAX(persoon)+1, 10, 0) INTO @new_persoon FROM repis.kirjed;
+        SET NEW.persoon = @new_persoon;
+      END if;
+      SELECT CONCAT('TS-', lpad(RIGHT(MAX(kirjekood), 7)+1, 7, '0')) 
+		  INTO @new_kirjekood
+		  FROM repis.kirjed 
+		 WHERE allikas = 'TS';
+
+      SET NEW.kirjekood = @new_kirjekood;
+      SET NEW.allikas = 'TS';
+    END if;
+
+  END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `kirjed_AI` AFTER INSERT ON `kirjed` FOR EACH ROW proc_label:BEGIN
+
+	INSERT IGNORE INTO z_queue (`kirjekood1`, `kirjekood2`, `task`) 
+	VALUES (NEW.persoon, '', 'proc_NK_refresh');
+	
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`localhost`*/ /*!50003 TRIGGER `kirjed_BU` BEFORE UPDATE ON `kirjed` FOR EACH ROW proc_label:BEGIN
+
+    DECLARE msg VARCHAR(2000);
+
+    IF current_user() NOT IN ('michelek@localhost', 'ylle@localhost', 'queue@localhost') THEN
+      SELECT concat_ws(current_user(), '\n'
+        , 'Kirjeid saab muuta ainult töölaual.'
+      ) INTO msg;
+      SIGNAL SQLSTATE '03100' SET MESSAGE_TEXT = msg;
+    END IF;
+
+    IF OLD.persoon = OLD.kirjekood AND OLD.persoon <> NEW.persoon AND 1 THEN
+      INSERT INTO repis.z_queue (task, params)
+		VALUES ('repis.merge_persons', CONCAT("'", NEW.persoon, "', '", OLD.persoon, "'"));
+      -- SET NEW.persoon = OLD.persoon;
+    END IF;
+
+    IF NEW.allikas = 'EMI' THEN
+      SET NEW.kirje = concat_ws('. ', 
+                                if(NEW.KirjePersoon = '', NULL, NEW.KirjePersoon), 
+                                if(NEW.kirjeJutt = '', NULL, NEW.kirjeJutt));
+    END IF;
+
+    IF NEW.allikas = 'TS' THEN
+      SET NEW.KirjePersoon = repis.func_TS_KirjePersoon(NEW.kirjekood);
+      SET NEW.kirje = concat_ws('. ', 
+                                nullif(NEW.KirjePersoon, ''), 
+                                nullif(NEW.kirjeJutt, ''));
+    END IF;
+
+    IF NEW.allikas = 'ELK' THEN
+      SET NEW.kirje = func_person_text(NEW.kirjekood);
+    END IF;
+
+  END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `kirjed_AU` AFTER UPDATE ON `kirjed` FOR EACH ROW proc_label:BEGIN
+
+	if false then
+	  leave proc_label;
+	END if;
+
+	if NEW.persoon   <> OLD.persoon
+	OR NEW.kirje     <> OLD.kirje
+	OR NEW.Eesnimi   <> OLD.Eesnimi
+	OR NEW.Perenimi  <> OLD.Perenimi
+	OR NEW.Emanimi   <> OLD.Emanimi
+	OR NEW.Isanimi   <> OLD.Isanimi
+	OR NEW.Sünd      <> OLD.Sünd
+	OR NEW.Surm      <> OLD.Surm
+	OR NEW.Sünnikoht <> OLD.Sünnikoht
+	OR NEW.Surmakoht <> OLD.Surmakoht
+	OR NEW.EiArvesta <> OLD.EiArvesta
+	OR NEW.Peatatud  <> OLD.Peatatud
+	OR NEW.pub_emem     <> OLD.pub_emem
+	OR NEW.pub_kivi     <> OLD.pub_kivi
+	OR NEW.pub_wwiiref  <> OLD.pub_wwiiref
+	OR NEW.pub_evo      <> OLD.pub_evo
+	OR NEW.pub_isPerson <> OLD.pub_isPerson
+	OR NEW.updated_at <> OLD.updated_at
+	THEN
+
+		INSERT IGNORE INTO z_queue (`kirjekood1`, `kirjekood2`, `task`) 
+		VALUES (NEW.persoon, '', 'proc_NK_refresh');
+		-- CALL repis.proc_NK_refresh(NEW.persoon);
+		
+		IF NEW.persoon <> OLD.persoon THEN
+			INSERT IGNORE INTO z_queue (`kirjekood1`, `kirjekood2`, `task`) 
+			VALUES (OLD.persoon, '', 'proc_NK_refresh');
+			--	CALL proc_NK_refresh(OLD.persoon);
+		END IF;
+
+	END IF;
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `kirjed_BD` BEFORE DELETE ON `kirjed` FOR EACH ROW BEGIN
+ if FALSE then
+ 
+	if OLD.allikas = 'RK' then
+		UPDATE import.repr_kart rk SET rk.persoon = NULL WHERE rk.isikukood = OLD.kirjekood;
+	ELSEIF OLD.allikas = 'RR' then
+		UPDATE import.rahvastikuregister rr SET rr.persoon = NULL WHERE rr.kirjekood = OLD.kirjekood;
+	ELSEIF OLD.allikas = 'RPT' then
+		UPDATE import.pensionitoimikud pt SET pt.persoon = NULL WHERE pt.kirjekood = OLD.kirjekood;
+	END if;
+
+ END if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `kirjed_AD` AFTER DELETE ON `kirjed` FOR EACH ROW proc_label:BEGIN
+
+		INSERT IGNORE INTO z_queue (`kirjekood1`, `kirjekood2`, `task`) 
+		VALUES (OLD.persoon, '', 'proc_NK_refresh');
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `sugulased_after_insert` AFTER INSERT ON `sugulased` FOR EACH ROW BEGIN
+
+	CALL pub.2pub(new.persoon);
+	CALL pub.2pub(new.sugulane);
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`michelek`@`127.0.0.1`*/ /*!50003 TRIGGER `sugulased_after_update` AFTER UPDATE ON `sugulased` FOR EACH ROW BEGIN
+
+	CALL pub.2pub(new.persoon);
+	CALL pub.2pub(new.sugulane);
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Dumping events for database 'repis'
+--
+/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+/*!50106 DROP EVENT IF EXISTS `backup` */;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb4 */ ;;
+/*!50003 SET character_set_results = utf8mb4 */ ;;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`michelek`@`localhost`*/ /*!50106 EVENT `backup` ON SCHEDULE EVERY 1 DAY STARTS '2017-11-19 02:00:00' ON COMPLETION PRESERVE ENABLE DO CALL aruanded.memoriaal_ee() */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+/*!50106 DROP EVENT IF EXISTS `process_queue` */;;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb4 */ ;;
+/*!50003 SET character_set_results = utf8mb4 */ ;;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`michelek`@`127.0.0.1`*/ /*!50106 EVENT `process_queue` ON SCHEDULE EVERY 1 SECOND STARTS '2022-05-16 22:00:00' ON COMPLETION PRESERVE ENABLE DO CALL repis.process_queue() */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+DELIMITER ;
+/*!50106 SET TIME_ZONE= @save_time_zone */ ;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
