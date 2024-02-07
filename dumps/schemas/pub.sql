@@ -40,6 +40,7 @@ CREATE TABLE `nimekirjad` (
   `tahvlikirje` longtext COLLATE utf8_estonian_ci NOT NULL DEFAULT '{}',
   `episoodid` longtext COLLATE utf8_estonian_ci NOT NULL DEFAULT '[]',
   `updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `entu` char(24) COLLATE utf8_estonian_ci DEFAULT NULL,
   PRIMARY KEY (`persoon`) USING BTREE,
   KEY `redirect` (`redirect`),
   CONSTRAINT `FK_nimekirjad_repis_kirjed` FOREIGN KEY (`persoon`) REFERENCES `repis`.`kirjed` (`kirjekood`) ON DELETE CASCADE ON UPDATE CASCADE,
